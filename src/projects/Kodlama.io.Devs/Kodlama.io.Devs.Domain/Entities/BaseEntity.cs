@@ -1,0 +1,12 @@
+﻿using Core.Persistence.Repositories;
+
+namespace Kodlama.io.Devs.Domain.Entities;
+public class ProgrammingLanguage : BaseEntity {
+    public String Name { get; set; }
+
+    public ProgrammingLanguage() { }
+    public ProgrammingLanguage(Guid id, String name) : this() {
+        Id = id;
+        Name = name;
+    }
+}
