@@ -12,7 +12,7 @@ public static class ApplicationServiceRegistration {
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddMediatR(Assembly.GetExecutingAssembly());
-        Debug.WriteLine("Assembly :::=>>>>>>>>>> " + Assembly.GetExecutingAssembly());
+     
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
         //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));

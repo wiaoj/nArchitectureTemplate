@@ -3,7 +3,7 @@ using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Common.Validatio
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 
-internal class UpdateProgrammingLanguageValidator : AbstractValidator<UpdateProgrammingLanguageCommand> {
+public class UpdateProgrammingLanguageValidator : AbstractValidator<UpdateProgrammingLanguageCommand> {
 	public UpdateProgrammingLanguageValidator() {
 		RuleFor(x => x.Id).Id();
 		RuleFor(x => x.Name).Name();
