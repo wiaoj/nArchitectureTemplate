@@ -1,11 +1,8 @@
-﻿namespace Core.Application.Requests;
+﻿using FluentValidation;
 
-public class PageRequest {
-	public Int32 Page { get; set; }
-	public Byte PageSize { get; set; }
+namespace Core.Application.Requests;
 
-	public PageRequest() {
-		Page = 0;
-		PageSize = 5;
-	}
+public record PageRequest {
+	public Int32 Page { get; set; } = 0;
+	public Int32 PageSize { get; set; } = 5;
 }

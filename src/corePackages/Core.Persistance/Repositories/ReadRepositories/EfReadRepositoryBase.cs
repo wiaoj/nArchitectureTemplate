@@ -10,44 +10,44 @@ public class EfReadRepositoryBase<TypeEntity, TypeContext> : EfRepositoryBase<Ty
 {
     public EfReadRepositoryBase(TypeContext context) : base(context) { }
 
-    public async Task<TypeEntity?> GetAsync(Expression<Func<TypeEntity, bool>> predicate)
+    public async Task<TypeEntity?> GetAsync(Expression<Func<TypeEntity, Boolean>> predicate)
     {
         return await Context.Set<TypeEntity>().FirstOrDefaultAsync(predicate);
     }
 
     public async Task<IPaginate<TypeEntity>> GetListAsync(
-            Expression<Func<TypeEntity, bool>>? predicate = null,
+            Expression<Func<TypeEntity, Boolean>>? predicate = null,
             Func<IQueryable<TypeEntity>, IOrderedQueryable<TypeEntity>>? orderBy = null,
-            Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, object>>? include = null,
-            int index = 0, int size = 10,
-            bool enableTracking = true,
+            Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, Object>>? include = null,
+            Int32 index = 0, Int32 size = 10,
+            Boolean enableTracking = true,
             CancellationToken cancellationToken = default
         )
     {
         IQueryable<TypeEntity> queryable = Query();
-        if (!enableTracking)
+        if (enableTracking is false)
             queryable = queryable.AsNoTracking();
-        if (include != null)
+        if (include is not null)
             queryable = include(queryable);
-        if (predicate != null)
+        if (predicate is not null)
             queryable = queryable.Where(predicate);
-        if (orderBy != null)
+        if (orderBy is not null)
             return await orderBy(queryable).ToPaginateAsync(index, size, 0, cancellationToken);
         return await queryable.ToPaginateAsync(index, size, 0, cancellationToken);
     }
 
     public async Task<IPaginate<TypeEntity>> GetListByDynamicAsync(Dynamic.Dynamic dynamic,
                                                                 Func<IQueryable<TypeEntity>,
-                                                                        IIncludableQueryable<TypeEntity, object>>?
+                                                                        IIncludableQueryable<TypeEntity, Object>>?
                                                                     include = null,
-                                                                int index = 0, int size = 10,
-                                                                bool enableTracking = true,
+                                                                Int32 index = 0, Int32 size = 10,
+                                                                Boolean enableTracking = true,
                                                                 CancellationToken cancellationToken = default)
     {
         IQueryable<TypeEntity> queryable = Query().AsQueryable().ToDynamic(dynamic);
-        if (!enableTracking)
+        if (enableTracking is false)
             queryable = queryable.AsNoTracking();
-        if (include != null)
+        if (include is not null)
             queryable = include(queryable);
         return await queryable.ToPaginateAsync(index, size, 0, cancellationToken);
     }
@@ -57,38 +57,38 @@ public class EfReadRepositoryBase<TypeEntity, TypeContext> : EfRepositoryBase<Ty
         return Context.Set<TypeEntity>();
     }
 
-    public TypeEntity? Get(Expression<Func<TypeEntity, bool>> predicate)
+    public TypeEntity? Get(Expression<Func<TypeEntity, Boolean>> predicate)
     {
         return Context.Set<TypeEntity>().FirstOrDefault(predicate);
     }
 
-    public IPaginate<TypeEntity> GetList(Expression<Func<TypeEntity, bool>>? predicate = null,
+    public IPaginate<TypeEntity> GetList(Expression<Func<TypeEntity, Boolean>>? predicate = null,
                                       Func<IQueryable<TypeEntity>, IOrderedQueryable<TypeEntity>>? orderBy = null,
-                                      Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, object>>? include = null,
-                                      int index = 0, int size = 10,
-                                      bool enableTracking = true)
+                                      Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, Object>>? include = null,
+                                      Int32 index = 0, Int32 size = 10,
+                                      Boolean enableTracking = true)
     {
         IQueryable<TypeEntity> queryable = Query();
-        if (!enableTracking)
+        if (enableTracking is false)
             queryable = queryable.AsNoTracking();
-        if (include != null)
+        if (include is not null)
             queryable = include(queryable);
-        if (predicate != null)
+        if (predicate is not null)
             queryable = queryable.Where(predicate);
-        if (orderBy != null)
+        if (orderBy is not null)
             return orderBy(queryable).ToPaginate(index, size);
         return queryable.ToPaginate(index, size);
     }
 
     public IPaginate<TypeEntity> GetListByDynamic(Dynamic.Dynamic dynamic,
-                                               Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, object>>?
-                                                   include = null, int index = 0, int size = 10,
-                                               bool enableTracking = true)
+                                               Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, Object>>?
+                                                   include = null, Int32 index = 0, Int32 size = 10,
+                                               Boolean enableTracking = true)
     {
         IQueryable<TypeEntity> queryable = Query().AsQueryable().ToDynamic(dynamic);
-        if (!enableTracking)
+        if (enableTracking is false)
             queryable = queryable.AsNoTracking();
-        if (include != null)
+        if (include is not null)
             queryable = include(queryable);
         return queryable.ToPaginate(index, size);
     }
