@@ -2,5 +2,5 @@
 
 public class DeletedProgrammingLanguageDto {
     public Guid Id { get; set; }
-    public String Name { get; set; }
+    //public String Name { get; set; }
 }

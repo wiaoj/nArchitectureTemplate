@@ -21,7 +21,7 @@ public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLangu
         }
 
         public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken) {
-            //await _programmingLanguageBusinessRules.ProgrammingLanguageShouldExistWhenRequestId(request.Id);
+            await _programmingLanguageBusinessRules.ProgrammingLanguageShouldExistWhenRequestId(request.Id);
 
             ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
             ProgrammingLanguage deletedProgrammingLanguage = await _programmingLanguageWriteRepository.DeleteAsync(mappedProgrammingLanguage);

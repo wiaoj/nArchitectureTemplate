@@ -20,7 +20,7 @@ public class GetByIdProgrammingLanguageQuery : IRequest<ProgrammingLanguageGetBy
         }
 
         public async Task<ProgrammingLanguageGetByIdDto> Handle(GetByIdProgrammingLanguageQuery request, CancellationToken cancellationToken) {
-            var entity = await _programmingLanguageReadRepository.GetByIdAsync(request.Id);
+            var entity = await _programmingLanguageReadRepository.GetByIdAsync(request.Id, enableTracking: false);
             await _programmingLanguageBusinessRules.ProgrammingLanguageShouldExistWhenRequest(entity);
             ProgrammingLanguageGetByIdDto entityGetByIdDto = _mapper.Map<ProgrammingLanguageGetByIdDto>(entity);
             return entityGetByIdDto;

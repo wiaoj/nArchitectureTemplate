@@ -20,7 +20,10 @@ public class GetListProgrammingLanguageQuery : IRequest<ProgrammingLanguageListM
         public async Task<ProgrammingLanguageListModel> Handle(GetListProgrammingLanguageQuery request, CancellationToken cancellationToken) {
             var entities = await _programmingLanguageReadRepository.GetListAsync(
                             index: request.PageRequest.Page,
-                            size: request.PageRequest.PageSize);
+                            size: request.PageRequest.PageSize,
+                            enableTracking: false,
+                            cancellationToken: cancellationToken
+                            );
             ProgrammingLanguageListModel mappedEntitiesModel = _mapper.Map<ProgrammingLanguageListModel>(entities);
 
             return mappedEntitiesModel;
