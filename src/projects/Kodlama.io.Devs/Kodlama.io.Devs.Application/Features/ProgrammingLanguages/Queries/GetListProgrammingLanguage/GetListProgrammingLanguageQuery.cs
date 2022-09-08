@@ -8,7 +8,7 @@ namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetL
 public class GetListProgrammingLanguageQuery : IRequest<ProgrammingLanguageListModel> {
     public PageRequest PageRequest { get; set; }
 
-    private class GetListProgrammingLanguageQueryHandler : IRequestHandler<GetListProgrammingLanguageQuery, ProgrammingLanguageListModel> {
+    internal class GetListProgrammingLanguageQueryHandler : IRequestHandler<GetListProgrammingLanguageQuery, ProgrammingLanguageListModel> {
         private readonly IProgrammingLanguageReadRepository _programmingLanguageReadRepository;
         private readonly IMapper _mapper;
 

@@ -6,7 +6,7 @@ namespace Core.Persistence.Repositories.ReadRepositories;
 
 public interface IAsyncReadRepository<TypeEntity> : IQuery<TypeEntity> where TypeEntity : BaseEntity {
 	Task<TypeEntity?> GetAsync(Expression<Func<TypeEntity, Boolean>> predicate);
-	Task<TypeEntity?> GetByIdAsync(Guid id, Boolean enableTracking = true);
+	Task<TypeEntity?> GetByIdAsync(Guid id, Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, Object>>? include = null, Boolean enableTracking = true);
 	Task<IPaginate<TypeEntity>> GetListAsync(
 									Expression<Func<TypeEntity, Boolean>>? predicate = null,
 									Func<IQueryable<TypeEntity>, IOrderedQueryable<TypeEntity>>? orderBy = null,

@@ -93,9 +93,14 @@ public class EfReadRepositoryBase<TypeEntity, TypeContext> : EfRepositoryBase<Ty
         return queryable.ToPaginate(index, size);
     }
 
-    public async Task<TypeEntity?> GetByIdAsync(Guid id, Boolean enableTracking = true) {
-       return enableTracking ? 
-            await Context.Set<TypeEntity>().FindAsync(id) :
-            await Context.Set<TypeEntity>().AsNoTracking().FirstOrDefaultAsync(x => x.Id.Equals(id));
+    public async Task<TypeEntity?> GetByIdAsync(Guid id, Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, Object>>? include = null, Boolean enableTracking = true) {
+        var entity = Query();
+        if(enableTracking is false) {
+            entity = entity.AsNoTracking();
+        }
+        if(include is not null) {
+            entity = include(entity);
+        }
+       return await entity.FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 }

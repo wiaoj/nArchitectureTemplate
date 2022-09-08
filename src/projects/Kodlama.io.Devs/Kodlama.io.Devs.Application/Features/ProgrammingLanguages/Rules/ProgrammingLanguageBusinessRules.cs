@@ -25,6 +25,6 @@ internal class ProgrammingLanguageBusinessRules {
     public async Task ProgrammingLanguageShouldExistWhenRequestId(Guid id) {
         ProgrammingLanguage? programmingLanguage = await _programmingLanguageReadRepository.GetByIdAsync(id, enableTracking: false);
         if(programmingLanguage is null)
-            throw new BusinessException("Requested programming language does not exists.");
+            throw new BusinessException("Programming language does not exists.");
     }
 }

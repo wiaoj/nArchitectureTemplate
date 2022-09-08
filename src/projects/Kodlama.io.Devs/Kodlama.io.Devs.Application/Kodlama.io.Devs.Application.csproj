@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Folder Include="Features\ProgrammingFrameworks\Constants\" />
         <Folder Include="Features\ProgrammingLanguages\Constants\" />
-        <Folder Include="Services\" />
     </ItemGroup>
 
     <ItemGroup>

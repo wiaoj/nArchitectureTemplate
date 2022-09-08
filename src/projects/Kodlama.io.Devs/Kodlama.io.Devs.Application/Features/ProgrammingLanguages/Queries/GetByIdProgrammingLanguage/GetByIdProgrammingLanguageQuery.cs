@@ -3,12 +3,13 @@ using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos.Queries;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.Devs.Application.Services.ReadRepositories;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 public class GetByIdProgrammingLanguageQuery : IRequest<ProgrammingLanguageGetByIdDto> {
     public Guid Id { get; set; }
 
-    private class GetByIdProgrammingLanguageQueryHandler : IRequestHandler<GetByIdProgrammingLanguageQuery, ProgrammingLanguageGetByIdDto> {
+    internal class GetByIdProgrammingLanguageQueryHandler : IRequestHandler<GetByIdProgrammingLanguageQuery, ProgrammingLanguageGetByIdDto> {
         private readonly IProgrammingLanguageReadRepository _programmingLanguageReadRepository;
         private readonly IMapper _mapper;
         private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusinessRules;
@@ -20,10 +21,10 @@ public class GetByIdProgrammingLanguageQuery : IRequest<ProgrammingLanguageGetBy
         }
 
         public async Task<ProgrammingLanguageGetByIdDto> Handle(GetByIdProgrammingLanguageQuery request, CancellationToken cancellationToken) {
-            var entity = await _programmingLanguageReadRepository.GetByIdAsync(request.Id, enableTracking: false);
-            await _programmingLanguageBusinessRules.ProgrammingLanguageShouldExistWhenRequest(entity);
-            ProgrammingLanguageGetByIdDto entityGetByIdDto = _mapper.Map<ProgrammingLanguageGetByIdDto>(entity);
-            return entityGetByIdDto;
+            var programmingLanguage = await _programmingLanguageReadRepository.GetByIdAsync(request.Id, enableTracking: false);
+            await _programmingLanguageBusinessRules.ProgrammingLanguageShouldExistWhenRequest(programmingLanguage);
+            ProgrammingLanguageGetByIdDto programmingLanguageGetByIdDto = _mapper.Map<ProgrammingLanguageGetByIdDto>(programmingLanguage);
+            return programmingLanguageGetByIdDto;
         }
     }
 }

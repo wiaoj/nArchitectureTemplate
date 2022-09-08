@@ -16,6 +16,9 @@ public static class PersistenceServiceRegistration {
         services.AddScoped<IProgrammingLanguageReadRepository, ProgrammingLanguageReadRepository>();
         services.AddScoped<IProgrammingLanguageWriteRepository, ProgrammingLanguageWriteRepository>();
 
+        services.AddScoped<IProgrammingFrameworkReadRepository, ProgrammingFrameworkReadRepository>();
+        services.AddScoped<IProgrammingFrameworkWriteRepository, ProgrammingFrameworkWriteRepository>();
+
         return services;
     }
 }
