@@ -13,7 +13,7 @@ public class OtpNetOtpAuthenticatorHelper : IOtpAuthenticatorHelper {
 	}
 
 	public Task<String> ConvertSecretKeyToString(Byte[] secretKey) {
-		string base32String = Base32Encoding.ToString(secretKey);
+		String base32String = Base32Encoding.ToString(secretKey);
 		return Task.FromResult(base32String);
 	}
 
