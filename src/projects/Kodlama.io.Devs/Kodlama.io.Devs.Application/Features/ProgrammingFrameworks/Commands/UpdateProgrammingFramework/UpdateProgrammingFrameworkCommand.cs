@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Common.ValidationRulesExtension;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Rules;
 using Kodlama.io.Devs.Application.Services.Repositories.WriteRepositories;
 using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.UpdateProgrammingFramework;
 public class UpdateProgrammingFrameworkCommand : IRequest<UpdatedProgrammingFrameworkDto> {
@@ -25,9 +19,9 @@ public class UpdateProgrammingFrameworkCommand : IRequest<UpdatedProgrammingFram
         private readonly ProgrammingFrameworkBusinessRules _programmingFrameworkBusinessRules;
 
         public UpdateProgrammingFrameworkCommandHandler(IProgrammingFrameworkWriteRepository programmingFrameworkWriteRepository, IMapper mapper, ProgrammingFrameworkBusinessRules programmingFrameworkBusinessRules) {
-            this._programmingFrameworkWriteRepository = programmingFrameworkWriteRepository;
-            this._mapper = mapper;
-            this._programmingFrameworkBusinessRules = programmingFrameworkBusinessRules;
+            _programmingFrameworkWriteRepository = programmingFrameworkWriteRepository;
+            _mapper = mapper;
+            _programmingFrameworkBusinessRules = programmingFrameworkBusinessRules;
         }
 
         public async Task<UpdatedProgrammingFrameworkDto> Handle(UpdateProgrammingFrameworkCommand request, CancellationToken cancellationToken) {

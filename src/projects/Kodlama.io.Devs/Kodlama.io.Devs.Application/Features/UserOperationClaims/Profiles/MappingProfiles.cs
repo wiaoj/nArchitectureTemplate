@@ -8,9 +8,9 @@ using Kodlama.io.Devs.Application.Features.UserOperationClaims.Models;
 
 namespace Kodlama.io.Devs.Application.Features.UserOperationClaims.Profiles;
 public class MappingProfiles : Profile {
-	public MappingProfiles() {
-		CreateMap<UserOperationClaim, CreateUserOperationClaimCommand>().ReverseMap();
-		CreateMap<UserOperationClaim, CreatedUserOperationClaimDto>().ReverseMap();
+    public MappingProfiles() {
+        CreateMap<UserOperationClaim, CreateUserOperationClaimCommand>().ReverseMap();
+        CreateMap<UserOperationClaim, CreatedUserOperationClaimDto>().ReverseMap();
 
         //CreateMap<UserOperationClaim, DeleteUserOperationClaimCommand>().ReverseMap();
         //CreateMap<UserOperationClaim, DeletedUserOperationClaimDto>().ReverseMap();
@@ -19,6 +19,6 @@ public class MappingProfiles : Profile {
         //CreateMap<UserOperationClaim, UpdatedUserOperationClaimDto>().ReverseMap();
 
         CreateMap<UserOperationClaim, UserOperationClaimListDto>().ReverseMap();
-		CreateMap<IPaginate<UserOperationClaim>, UserOperationClaimListModel>().ReverseMap();
-	}
+        CreateMap<IPaginate<UserOperationClaim>, UserOperationClaimListModel>().ReverseMap();
+    }
 }

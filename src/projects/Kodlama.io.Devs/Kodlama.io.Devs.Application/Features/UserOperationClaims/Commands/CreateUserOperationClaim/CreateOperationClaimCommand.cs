@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
-using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using Kodlama.io.Devs.Application.Features.UserOperationClaims.Dtos.Commands;
 using Kodlama.io.Devs.Application.Services.Repositories.WriteRepositories;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 
 namespace Kodlama.io.Devs.Application.Features.UserOperationClaims.Commands.CreateUserOperationClaim;
 public class CreateUserOperationClaimCommand : IRequest<CreatedUserOperationClaimDto> {
@@ -16,8 +14,8 @@ public class CreateUserOperationClaimCommand : IRequest<CreatedUserOperationClai
         private readonly IMapper _mapper;
 
         public CreateUserOperationClaimCommandHandler(IUserOperationClaimWriteRepository userOperationClaimWriteRepository, IMapper mapper) {
-            this._userOperationClaimWriteRepository = userOperationClaimWriteRepository;
-            this._mapper = mapper;
+            _userOperationClaimWriteRepository = userOperationClaimWriteRepository;
+            _mapper = mapper;
         }
 
         public async Task<CreatedUserOperationClaimDto> Handle(CreateUserOperationClaimCommand request, CancellationToken cancellationToken) {

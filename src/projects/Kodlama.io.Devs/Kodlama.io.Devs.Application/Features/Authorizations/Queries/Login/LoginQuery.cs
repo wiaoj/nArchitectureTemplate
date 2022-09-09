@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using Core.Security.Dtos;
 using Core.Security.Entities;
-using Core.Security.Hashing;
 using Core.Security.JWT;
 using Kodlama.io.Devs.Application.Features.Authorizations.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.Authorizations.Rules;
 using Kodlama.io.Devs.Application.Services.AuthService;
 using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Kodlama.io.Devs.Application.Features.Authorizations.Queries.Login;
 public class LoginQuery : IRequest<LoginedDto> {
@@ -22,15 +20,15 @@ public class LoginQuery : IRequest<LoginedDto> {
         private readonly IAuthService _authService;
 
         public LoginQueryHandler(
-            IUserReadRepository userReadRepository, 
-            IMapper mapper, 
-            AuthorizationBusinessRules authorizationBusinessRules, 
+            IUserReadRepository userReadRepository,
+            IMapper mapper,
+            AuthorizationBusinessRules authorizationBusinessRules,
             IAuthService authService
             ) {
-            this._userReadRepository = userReadRepository;
-            this._mapper = mapper;
-            this._authorizationBusinessRules = authorizationBusinessRules;
-            this._authService = authService;
+            _userReadRepository = userReadRepository;
+            _mapper = mapper;
+            _authorizationBusinessRules = authorizationBusinessRules;
+            _authService = authService;
         }
 
         public async Task<LoginedDto> Handle(LoginQuery request, CancellationToken cancellationToken) {

@@ -1,6 +1,4 @@
-﻿using Core.Persistence.Repositories;
-
-namespace Core.Persistence.Repositories.WriteRepositories;
+﻿namespace Core.Persistence.Repositories.WriteRepositories;
 
 public interface IAsyncWriteRepository<TypeEntity> where TypeEntity : BaseEntity {
     Task<TypeEntity> AddAsync(TypeEntity entity);

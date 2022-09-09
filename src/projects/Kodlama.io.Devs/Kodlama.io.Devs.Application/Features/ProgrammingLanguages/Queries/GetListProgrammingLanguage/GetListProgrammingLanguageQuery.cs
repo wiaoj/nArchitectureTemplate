@@ -13,8 +13,8 @@ public class GetListProgrammingLanguageQuery : IRequest<ProgrammingLanguageListM
         private readonly IMapper _mapper;
 
         public GetListProgrammingLanguageQueryHandler(IProgrammingLanguageReadRepository programmingLanguageReadRepository, IMapper mapper) {
-            this._programmingLanguageReadRepository = programmingLanguageReadRepository;
-            this._mapper = mapper;
+            _programmingLanguageReadRepository = programmingLanguageReadRepository;
+            _mapper = mapper;
         }
 
         public async Task<ProgrammingLanguageListModel> Handle(GetListProgrammingLanguageQuery request, CancellationToken cancellationToken) {

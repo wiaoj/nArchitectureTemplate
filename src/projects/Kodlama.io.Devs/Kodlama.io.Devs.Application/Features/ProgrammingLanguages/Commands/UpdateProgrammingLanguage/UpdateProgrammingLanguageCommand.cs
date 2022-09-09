@@ -16,9 +16,9 @@ public class UpdateProgrammingLanguageCommand : IRequest<UpdatedProgrammingLangu
         private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusinessRules;
 
         public UpdateProgrammingLanguageCommandHandler(IProgrammingLanguageWriteRepository programmingLanguageWriteRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules) {
-            this._programmingLanguageWriteRepository = programmingLanguageWriteRepository;
-            this._mapper = mapper;
-            this._programmingLanguageBusinessRules = programmingLanguageBusinessRules;
+            _programmingLanguageWriteRepository = programmingLanguageWriteRepository;
+            _mapper = mapper;
+            _programmingLanguageBusinessRules = programmingLanguageBusinessRules;
         }
 
         public async Task<UpdatedProgrammingLanguageDto> Handle(UpdateProgrammingLanguageCommand request, CancellationToken cancellationToken) {

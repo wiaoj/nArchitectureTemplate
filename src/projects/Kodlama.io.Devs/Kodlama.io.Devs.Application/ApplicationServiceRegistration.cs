@@ -2,8 +2,10 @@
 using Core.Application.Pipelines.Validation;
 using FluentValidation;
 using Kodlama.io.Devs.Application.Features.Authorizations.Rules;
+using Kodlama.io.Devs.Application.Features.OperationClaims.Rules;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Rules;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
+using Kodlama.io.Devs.Application.Features.SocialLinks.Rules;
 using Kodlama.io.Devs.Application.Services.AuthService;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +17,7 @@ public static class ApplicationServiceRegistration {
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddMediatR(Assembly.GetExecutingAssembly());
-     
+
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
@@ -24,9 +26,11 @@ public static class ApplicationServiceRegistration {
         //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
 
+        services.AddScoped<AuthorizationBusinessRules>();
         services.AddScoped<ProgrammingLanguageBusinessRules>();
         services.AddScoped<ProgrammingFrameworkBusinessRules>();
-        services.AddScoped<AuthorizationBusinessRules>();
+        services.AddScoped<OperationClaimBusinessRules>();
+        services.AddScoped<SocialLinkBusinessRules>();
 
         services.AddTransient<IAuthService, AuthService>();
         return services;

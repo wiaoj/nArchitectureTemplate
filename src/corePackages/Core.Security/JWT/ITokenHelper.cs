@@ -3,7 +3,7 @@
 namespace Core.Security.JWT;
 
 public interface ITokenHelper {
-	AccessToken CreateToken(User user, IList<OperationClaim> operationClaims);
+    AccessToken CreateToken(User user, IList<OperationClaim> operationClaims);
 
-	RefreshToken CreateRefreshToken(User user, String ipAddress);
+    RefreshToken CreateRefreshToken(User user, String ipAddress);
 }

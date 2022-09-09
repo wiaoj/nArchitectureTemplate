@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Rules;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
 using Kodlama.io.Devs.Application.Services.Repositories.WriteRepositories;
 using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
@@ -16,9 +15,9 @@ public class DeleteProgrammingFrameworkCommand : IRequest<DeletedProgrammingFram
         private readonly ProgrammingFrameworkBusinessRules _programmingFrameworkBusinessRules;
 
         public DeleteProgrammingFrameworkCommandHandler(IProgrammingFrameworkWriteRepository programmingFrameworkWriteRepository, IMapper mapper, ProgrammingFrameworkBusinessRules programmingFrameworkBusinessRules) {
-            this._programmingFrameworkWriteRepository = programmingFrameworkWriteRepository;
-            this._mapper = mapper;
-            this._programmingFrameworkBusinessRules = programmingFrameworkBusinessRules;
+            _programmingFrameworkWriteRepository = programmingFrameworkWriteRepository;
+            _mapper = mapper;
+            _programmingFrameworkBusinessRules = programmingFrameworkBusinessRules;
         }
 
         public async Task<DeletedProgrammingFrameworkDto> Handle(DeleteProgrammingFrameworkCommand request, CancellationToken cancellationToken) {

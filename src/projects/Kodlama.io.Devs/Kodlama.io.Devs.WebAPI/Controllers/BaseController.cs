@@ -1,5 +1,4 @@
-﻿using Core.Application.Requests;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.Devs.WebAPI.Controllers;

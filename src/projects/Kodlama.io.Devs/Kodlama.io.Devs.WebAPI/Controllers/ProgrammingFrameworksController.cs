@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Application.Requests;
+using Core.Persistence.Dynamic;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.CreateProgrammingFramework;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.DeleteProgrammingFramework;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.UpdateProgrammingFramework;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Queries;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Queries.GetByIdProgrammingFramework;
-using Core.Application.Requests;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Models;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Queries.GetByIdProgrammingFramework;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Queries.GetListProgrammingFrameworkByDynamic;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.CreateProgrammingFramework;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.UpdateProgrammingFramework;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.DeleteProgrammingFramework;
-using Core.Persistence.Dynamic;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.Devs.WebAPI.Controllers;
 
@@ -69,7 +69,7 @@ public class ProgrammingFrameworksController : BaseController {
     [Produces("application/json")]
     [ProducesResponseType(typeof(ProgrammingFrameworkListModel), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic) {
-        GetListProgrammingFrameworkByDynamicQuery getListProgrammingFrameworkByDynamicQuery = new() { 
+        GetListProgrammingFrameworkByDynamicQuery getListProgrammingFrameworkByDynamicQuery = new() {
             PageRequest = pageRequest,
             Dynamic = dynamic
         };

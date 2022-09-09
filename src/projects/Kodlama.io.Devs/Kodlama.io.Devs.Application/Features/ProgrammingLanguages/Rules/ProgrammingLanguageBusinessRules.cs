@@ -8,7 +8,7 @@ internal class ProgrammingLanguageBusinessRules {
     private readonly IProgrammingLanguageReadRepository _programmingLanguageReadRepository;
 
     public ProgrammingLanguageBusinessRules(IProgrammingLanguageReadRepository programmingLanguageReadRepository) {
-        this._programmingLanguageReadRepository = programmingLanguageReadRepository;
+        _programmingLanguageReadRepository = programmingLanguageReadRepository;
     }
 
     public async Task ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(String name) {
@@ -17,9 +17,10 @@ internal class ProgrammingLanguageBusinessRules {
             throw new BusinessException("Programming language name exists.");
     }
 
-    public async Task ProgrammingLanguageShouldExistWhenRequest(ProgrammingLanguage programmingLanguage) {
+    public Task ProgrammingLanguageShouldExistWhenRequest(ProgrammingLanguage? programmingLanguage) {
         if(programmingLanguage is null)
             throw new BusinessException("Requested programming language does not exists.");
+        return Task.CompletedTask;
     }
 
     public async Task ProgrammingLanguageShouldExistWhenRequestId(Guid id) {

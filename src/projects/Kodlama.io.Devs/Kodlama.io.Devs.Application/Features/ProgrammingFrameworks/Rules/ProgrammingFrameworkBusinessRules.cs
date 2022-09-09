@@ -10,8 +10,8 @@ internal class ProgrammingFrameworkBusinessRules {
     private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusinessRules;
 
     public ProgrammingFrameworkBusinessRules(IProgrammingFrameworkReadRepository programmingFrameworkReadRepository, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules) {
-        this._programmingFrameworkReadRepository = programmingFrameworkReadRepository;
-        this._programmingLanguageBusinessRules = programmingLanguageBusinessRules;
+        _programmingFrameworkReadRepository = programmingFrameworkReadRepository;
+        _programmingLanguageBusinessRules = programmingLanguageBusinessRules;
     }
 
     public async Task ProgrammingFrameworkVersionTagCanNotBeDuplicatedWhenInserted(String name, Double version, String tag) {

@@ -3,7 +3,7 @@ using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Common.Validatio
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
 public class GetByIdProgrammingLanguageValidator : AbstractValidator<DeleteProgrammingLanguageCommand> {
-	public GetByIdProgrammingLanguageValidator() {
-		RuleFor(x => x.Id).Id();
-	}
+    public GetByIdProgrammingLanguageValidator() {
+        RuleFor(x => x.Id).Id();
+    }
 }

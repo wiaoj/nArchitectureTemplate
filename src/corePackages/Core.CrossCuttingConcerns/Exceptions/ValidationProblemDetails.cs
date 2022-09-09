@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 namespace Core.CrossCuttingConcerns.Exceptions;
 
 public class ValidationProblemDetails : ProblemDetails {
-	public Object Errors { get; set; }
+    public Object Errors { get; set; }
 
-	public override String ToString() {
-		return JsonConvert.SerializeObject(this);
-	}
+    public override String ToString() {
+        return JsonConvert.SerializeObject(this);
+    }
 }

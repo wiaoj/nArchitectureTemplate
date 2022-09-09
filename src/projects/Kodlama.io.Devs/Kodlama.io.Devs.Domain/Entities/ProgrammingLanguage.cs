@@ -1,5 +1,4 @@
 ﻿using Core.Persistence.Repositories;
-using Core.Security.Enums;
 
 namespace Kodlama.io.Devs.Domain.Entities;
 public class ProgrammingLanguage : BaseEntity {

@@ -15,9 +15,9 @@ public class DeleteProgrammingLanguageCommand : IRequest<DeletedProgrammingLangu
         private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusinessRules;
 
         public DeleteProgrammingLanguageCommandHandler(IProgrammingLanguageWriteRepository programmingLanguageWriteRepository, IMapper mapper, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules) {
-            this._programmingLanguageWriteRepository = programmingLanguageWriteRepository;
-            this._mapper = mapper;
-            this._programmingLanguageBusinessRules = programmingLanguageBusinessRules;
+            _programmingLanguageWriteRepository = programmingLanguageWriteRepository;
+            _mapper = mapper;
+            _programmingLanguageBusinessRules = programmingLanguageBusinessRules;
         }
 
         public async Task<DeletedProgrammingLanguageDto> Handle(DeleteProgrammingLanguageCommand request, CancellationToken cancellationToken) {

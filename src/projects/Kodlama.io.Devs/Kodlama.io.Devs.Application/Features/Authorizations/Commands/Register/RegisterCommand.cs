@@ -6,10 +6,8 @@ using Core.Security.JWT;
 using Kodlama.io.Devs.Application.Features.Authorizations.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.Authorizations.Rules;
 using Kodlama.io.Devs.Application.Services.AuthService;
-using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
 using Kodlama.io.Devs.Application.Services.Repositories.WriteRepositories;
 using MediatR;
-using System.Diagnostics;
 
 namespace Kodlama.io.Devs.Application.Features.Authorizations.Commands.Register;
 public class RegisterCommand : IRequest<RegisteredDto> {
@@ -23,15 +21,15 @@ public class RegisterCommand : IRequest<RegisteredDto> {
         private readonly IAuthService _authService;
 
         public RegisterCommandHandler(
-            IUserWriteRepository userWriteRepository, 
+            IUserWriteRepository userWriteRepository,
             IMapper mapper,
             AuthorizationBusinessRules authorizationBusinessRules,
             IAuthService authService
             ) {
-            this._userWriteRepository = userWriteRepository;
-            this._mapper = mapper;
-            this._authorizationBusinessRules = authorizationBusinessRules;
-            this._authService = authService;
+            _userWriteRepository = userWriteRepository;
+            _mapper = mapper;
+            _authorizationBusinessRules = authorizationBusinessRules;
+            _authService = authService;
         }
 
         public async Task<RegisteredDto> Handle(RegisterCommand request, CancellationToken cancellationToken) {
@@ -40,7 +38,7 @@ public class RegisterCommand : IRequest<RegisteredDto> {
 
             HashingHelper.CreatePasswordHash(request.UserForRegisterDto.Password, out Byte[] passwordHash, out Byte[] passwordSalt);
 
-            User user = new User {
+            User user = new() {
                 Email = request.UserForRegisterDto.Email,
                 FirstName = request.UserForRegisterDto.FirstName,
                 LastName = request.UserForRegisterDto.LastName,

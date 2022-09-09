@@ -5,38 +5,38 @@ using MimeKit;
 namespace Core.Mailing.MailKitImplementations;
 
 public class MailKitMailService : IMailService {
-	private readonly IConfiguration _configuration;
-	private readonly MailSettings _mailSettings;
+    private readonly IConfiguration _configuration;
+    private readonly MailSettings _mailSettings;
 
-	public MailKitMailService(IConfiguration configuration) {
-		_configuration = configuration;
-		_mailSettings = configuration.GetSection("MailSettings").Get<MailSettings>();
-	}
+    public MailKitMailService(IConfiguration configuration) {
+        _configuration = configuration;
+        _mailSettings = configuration.GetSection("MailSettings").Get<MailSettings>();
+    }
 
-	public void SendMail(Mail mail) {
-		MimeMessage email = new();
+    public void SendMail(Mail mail) {
+        MimeMessage email = new();
 
-		email.From.Add(new MailboxAddress(_mailSettings.SenderFullName, _mailSettings.SenderEmail));
+        email.From.Add(new MailboxAddress(_mailSettings.SenderFullName, _mailSettings.SenderEmail));
 
-		email.To.Add(new MailboxAddress(mail.ToFullName, mail.ToEmail));
+        email.To.Add(new MailboxAddress(mail.ToFullName, mail.ToEmail));
 
-		email.Subject = mail.Subject;
+        email.Subject = mail.Subject;
 
-		BodyBuilder bodyBuilder = new() {
-			TextBody = mail.TextBody,
-			HtmlBody = mail.HtmlBody
-		};
+        BodyBuilder bodyBuilder = new() {
+            TextBody = mail.TextBody,
+            HtmlBody = mail.HtmlBody
+        };
 
-		if(mail.Attachments is not null)
-			foreach(MimeEntity? attachment in mail.Attachments)
-				bodyBuilder.Attachments.Add(attachment);
+        if(mail.Attachments is not null)
+            foreach(MimeEntity? attachment in mail.Attachments)
+                bodyBuilder.Attachments.Add(attachment);
 
-		email.Body = bodyBuilder.ToMessageBody();
+        email.Body = bodyBuilder.ToMessageBody();
 
-		using SmtpClient smtp = new();
-		smtp.Connect(_mailSettings.Server, _mailSettings.Port);
-		//smtp.Authenticate(_mailSettings.UserName, _mailSettings.Password);
-		smtp.Send(email);
-		smtp.Disconnect(true);
-	}
+        using SmtpClient smtp = new();
+        smtp.Connect(_mailSettings.Server, _mailSettings.Port);
+        //smtp.Authenticate(_mailSettings.UserName, _mailSettings.Password);
+        smtp.Send(email);
+        smtp.Disconnect(true);
+    }
 }

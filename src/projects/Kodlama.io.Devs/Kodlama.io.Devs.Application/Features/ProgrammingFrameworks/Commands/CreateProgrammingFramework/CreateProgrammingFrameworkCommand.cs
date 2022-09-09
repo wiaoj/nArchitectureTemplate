@@ -18,9 +18,9 @@ public class CreateProgrammingFrameworkCommand : IRequest<CreatedProgrammingFram
         private readonly ProgrammingFrameworkBusinessRules _programmingFrameworkBusinessRules;
 
         public CreateProgrammingFrameworkCommandHandler(IProgrammingFrameworkWriteRepository programmingFrameworkWriteRepository, IMapper mapper, ProgrammingFrameworkBusinessRules programmingFrameworkBusinessRules) {
-            this._programmingFrameworkWriteRepository = programmingFrameworkWriteRepository;
-            this._mapper = mapper;
-            this._programmingFrameworkBusinessRules = programmingFrameworkBusinessRules;
+            _programmingFrameworkWriteRepository = programmingFrameworkWriteRepository;
+            _mapper = mapper;
+            _programmingFrameworkBusinessRules = programmingFrameworkBusinessRules;
         }
 
         public async Task<CreatedProgrammingFrameworkDto> Handle(CreateProgrammingFrameworkCommand request, CancellationToken cancellationToken) {

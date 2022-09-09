@@ -19,7 +19,7 @@ public class AuthsController : BaseController {
     [ProducesResponseType(typeof(RegisteredDto), StatusCodes.Status201Created)]
     public async Task<IActionResult> Register([FromBody] UserForRegisterDto registerCommand) {
         RegisteredDto registeredDto = await Mediator.Send(
-            new RegisterCommand { 
+            new RegisterCommand {
                 UserForRegisterDto = registerCommand,
                 IpAddress = getIpAddress()
             });
@@ -31,7 +31,7 @@ public class AuthsController : BaseController {
     [ProducesResponseType(typeof(RegisteredDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> Login([FromBody] UserForLoginDto loginQuery) {
         LoginedDto loginedDto = await Mediator.Send(
-            new LoginQuery { 
+            new LoginQuery {
                 UserForLoginDto = loginQuery,
                 IpAddress = getIpAddress()
             });

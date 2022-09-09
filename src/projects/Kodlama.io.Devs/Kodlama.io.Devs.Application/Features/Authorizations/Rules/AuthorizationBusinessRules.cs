@@ -9,11 +9,11 @@ internal class AuthorizationBusinessRules {
     private readonly IUserReadRepository _userReadRepository;
 
     public AuthorizationBusinessRules(IUserReadRepository userReadRepository) {
-        this._userReadRepository = userReadRepository;
+        _userReadRepository = userReadRepository;
     }
 
     public async Task UserEmailShouldBeNotExists(String email) {
-        User? user = await _userReadRepository.GetAsync(u => u.Email.Equals(email));
+        User? user = await _userReadRepository.GetAsync(u => (u.Email).ToLower().Equals(email.ToLower()));
         if(user is not null)
             throw new BusinessException("User mail already exists");
     }
@@ -27,6 +27,5 @@ internal class AuthorizationBusinessRules {
         User? user = await _userReadRepository.GetAsync(u => u.Id == id);
         if(HashingHelper.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt) is false)
             throw new BusinessException("Password is wrong");
-
     }
 }

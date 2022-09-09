@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Kodlama.io.Devs.Persistence;
 public static class PersistenceServiceRegistration {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration) {
-        services.AddDbContext<BaseDbContext>(options => 
+        services.AddDbContext<BaseDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("KodlamaIoDevsConnectionString")));
 
         services.AddScoped<IProgrammingLanguageReadRepository, ProgrammingLanguageReadRepository>();
@@ -30,6 +30,9 @@ public static class PersistenceServiceRegistration {
 
         services.AddScoped<IUserOperationClaimReadRepository, UserOperationClaimReadRepository>();
         services.AddScoped<IUserOperationClaimWriteRepository, UserOperationClaimWriteRepository>();
+
+        services.AddScoped<ISocialLinkReadRepository, SocialLinkReadRepository>();
+        services.AddScoped<ISocialLinkWriteRepository, SocialLinkWriteRepository>();
 
         return services;
     }

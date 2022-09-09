@@ -1,14 +1,8 @@
 ﻿using Core.Persistence.Repositories;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Core.Security.Entities;
 
 public class RefreshToken : BaseEntity {
-    [NotMapped] //TODO: EF ile tabloya eklenmesi engellenecek
-    public override DateTime CreatedDate { get => base.CreatedDate; set => base.CreatedDate = value; }
-    [NotMapped] //TODO: EF ile tabloya eklenmesi engellenecek
-    public override DateTime UpdatedDate { get => base.UpdatedDate; set => base.UpdatedDate = value; }
-
     public Guid UserId { get; set; }
     public String Token { get; set; }
     public DateTime Expires { get; set; }

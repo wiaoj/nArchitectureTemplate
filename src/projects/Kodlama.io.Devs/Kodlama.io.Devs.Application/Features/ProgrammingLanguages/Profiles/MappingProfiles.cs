@@ -16,7 +16,7 @@ internal class MappingProfiles : Profile {
 
         CreateMap<ProgrammingLanguage, DeleteProgrammingLanguageCommand>().ReverseMap();
         CreateMap<ProgrammingLanguage, DeletedProgrammingLanguageDto>().ReverseMap();
-        
+
         CreateMap<ProgrammingLanguage, UpdateProgrammingLanguageCommand>().ReverseMap();
         CreateMap<ProgrammingLanguage, UpdatedProgrammingLanguageDto>().ReverseMap();
 
