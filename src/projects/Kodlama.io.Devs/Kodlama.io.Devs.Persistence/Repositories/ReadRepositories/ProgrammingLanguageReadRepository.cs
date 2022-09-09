@@ -1,5 +1,5 @@
 ﻿using Core.Persistence.Repositories.ReadRepositories;
-using Kodlama.io.Devs.Application.Services.ReadRepositories;
+using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
 using Kodlama.io.Devs.Domain.Entities;
 using Kodlama.io.Devs.Persistence.Context;
 

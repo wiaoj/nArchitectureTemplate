@@ -1,4 +1,4 @@
-﻿namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+﻿namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos.Commands;
 
 public class UpdatedProgrammingLanguageDto {
     public Guid Id { get; set; }

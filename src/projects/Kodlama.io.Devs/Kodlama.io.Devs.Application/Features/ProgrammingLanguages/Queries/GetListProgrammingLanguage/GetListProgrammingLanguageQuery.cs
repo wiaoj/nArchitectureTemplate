@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Core.Application.Requests;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Models;
-using Kodlama.io.Devs.Application.Services.ReadRepositories;
+using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
 using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;

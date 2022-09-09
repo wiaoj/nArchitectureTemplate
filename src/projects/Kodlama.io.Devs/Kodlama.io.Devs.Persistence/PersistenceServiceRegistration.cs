@@ -1,5 +1,5 @@
-﻿using Kodlama.io.Devs.Application.Services.ReadRepositories;
-using Kodlama.io.Devs.Application.Services.WriteRepositories;
+﻿using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
+using Kodlama.io.Devs.Application.Services.Repositories.WriteRepositories;
 using Kodlama.io.Devs.Persistence.Context;
 using Kodlama.io.Devs.Persistence.Repositories.ReadRepositories;
 using Kodlama.io.Devs.Persistence.Repositories.WriteRepositories;
@@ -18,6 +18,18 @@ public static class PersistenceServiceRegistration {
 
         services.AddScoped<IProgrammingFrameworkReadRepository, ProgrammingFrameworkReadRepository>();
         services.AddScoped<IProgrammingFrameworkWriteRepository, ProgrammingFrameworkWriteRepository>();
+
+        services.AddScoped<IUserReadRepository, UserReadRepository>();
+        services.AddScoped<IUserWriteRepository, UserWriteRepository>();
+
+        services.AddScoped<IRefreshTokenReadRepository, RefreshTokenReadRepository>();
+        services.AddScoped<IRefreshTokenWriteRepository, RefreshTokenWriteRepository>();
+
+        services.AddScoped<IOperationClaimReadRepository, OperationClaimReadRepository>();
+        services.AddScoped<IOperationClaimWriteRepository, OperationClaimWriteRepository>();
+
+        services.AddScoped<IUserOperationClaimReadRepository, UserOperationClaimReadRepository>();
+        services.AddScoped<IUserOperationClaimWriteRepository, UserOperationClaimWriteRepository>();
 
         return services;
     }

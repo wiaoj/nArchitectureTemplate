@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Queries;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Rules;
-using Kodlama.io.Devs.Application.Services.ReadRepositories;
+using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Core.Persistence.Paging;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.CreateProgrammingFrameworks;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.DeleteProgrammingFrameworks;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.UpdateProgrammingFrameworks;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.CreateProgrammingFramework;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.DeleteProgrammingFramework;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.UpdateProgrammingFramework;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Queries;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Models;

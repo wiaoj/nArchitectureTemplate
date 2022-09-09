@@ -1,9 +1,8 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
-using Kodlama.io.Devs.Application.Services.ReadRepositories;
+using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
 using Kodlama.io.Devs.Domain.Entities;
-using System.Formats.Asn1;
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Rules;
 internal class ProgrammingFrameworkBusinessRules {

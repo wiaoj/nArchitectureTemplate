@@ -21,7 +21,7 @@ public class AuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TReq
 		if(roleClaims is null)
 			throw new AuthorizationException("Claims not found.");
 
-		Boolean isNotMatchedARoleClaimWithRequestRoles =
+		Boolean isNotMatchedARoleClaimWithRequestRoles = 
 			roleClaims.FirstOrDefault(roleClaim => request.Roles.Any(role => role.Equals(roleClaim))).IsNullOrEmpty();
 		if(isNotMatchedARoleClaimWithRequestRoles)
 			throw new AuthorizationException("You are not authorized.");

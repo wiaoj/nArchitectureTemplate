@@ -1,10 +1,12 @@
-﻿using Core.Application.Pipelines.Validation;
+﻿using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Validation;
 using FluentValidation;
+using Kodlama.io.Devs.Application.Features.Authorizations.Rules;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Rules;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
+using Kodlama.io.Devs.Application.Services.AuthService;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System.Diagnostics;
 using System.Reflection;
 
 namespace Kodlama.io.Devs.Application;
@@ -16,7 +18,7 @@ public static class ApplicationServiceRegistration {
      
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-        //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
         //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
         //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
         //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
@@ -24,7 +26,9 @@ public static class ApplicationServiceRegistration {
 
         services.AddScoped<ProgrammingLanguageBusinessRules>();
         services.AddScoped<ProgrammingFrameworkBusinessRules>();
+        services.AddScoped<AuthorizationBusinessRules>();
 
+        services.AddTransient<IAuthService, AuthService>();
         return services;
     }
 }

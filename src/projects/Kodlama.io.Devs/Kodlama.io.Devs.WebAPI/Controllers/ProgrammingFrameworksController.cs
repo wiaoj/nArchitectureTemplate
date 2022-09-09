@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.CreateProgrammingFrameworks;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Commands;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.UpdateProgrammingFrameworks;
-using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.DeleteProgrammingFrameworks;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Queries;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Queries.GetByIdProgrammingFramework;
 using Core.Application.Requests;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Models;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Queries.GetListProgrammingFrameworkByDynamic;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.CreateProgrammingFramework;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.UpdateProgrammingFramework;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.DeleteProgrammingFramework;
 using Core.Persistence.Dynamic;
 
 namespace Kodlama.io.Devs.WebAPI.Controllers;
@@ -42,26 +42,26 @@ public class ProgrammingFrameworksController : BaseController {
 
     /*
     {
-  "sort": [
-    {
-      "field": "name",
-      "dir": "asc"
+        "sort": [
+            {
+                "field": "tag",
+                "dir": "asc"
+            }
+        ],
+        "filter": {
+            "field": "tag",
+            "operator": "eq",
+            "value": "latest",
+            "logic": "or",
+            "filters": [
+                {
+                    "field": "version",
+                    "operator": "gte",
+                    "value": "13"
+                }
+            ]
+        }
     }
-  ],
-  "filter": {
-    "field": "name",
-    "operator": "eq",
-    "value": "Series 4",
-    "logic": "or",
-    "filters": [
-      {
-       "field": "dailyPrice",
-       "operator": "gte", //"lte" => less then or equal to
-       "value": "1000"
-       }
-    ]
-  }
-}
     */
 
 

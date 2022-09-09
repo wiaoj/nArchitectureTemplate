@@ -1,6 +1,5 @@
 ﻿namespace Core.Persistence.Repositories.ReadRepositories;
 
-public interface IQuery<T>
-{
+public interface IQuery<T> {
     IQueryable<T> Query();
 }

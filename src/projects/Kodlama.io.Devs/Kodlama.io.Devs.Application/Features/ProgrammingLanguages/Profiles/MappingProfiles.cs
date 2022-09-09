@@ -3,7 +3,7 @@ using Core.Persistence.Paging;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
-using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos;
+using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos.Queries;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Models;
 using Kodlama.io.Devs.Domain.Entities;
@@ -20,8 +20,8 @@ internal class MappingProfiles : Profile {
         CreateMap<ProgrammingLanguage, UpdateProgrammingLanguageCommand>().ReverseMap();
         CreateMap<ProgrammingLanguage, UpdatedProgrammingLanguageDto>().ReverseMap();
 
-        CreateMap<IPaginate<ProgrammingLanguage>, ProgrammingLanguageListModel>().ReverseMap();
         CreateMap<ProgrammingLanguage, ProgrammingLanguageListDto>().ReverseMap();
+        CreateMap<IPaginate<ProgrammingLanguage>, ProgrammingLanguageListModel>().ReverseMap();
 
         CreateMap<ProgrammingLanguage, ProgrammingLanguageGetByIdDto>().ReverseMap();
     }

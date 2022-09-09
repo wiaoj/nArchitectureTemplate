@@ -7,8 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Folder Include="Features\Authorizations\Common\ValidationRulesExtension\" />
+        <Folder Include="Features\OperationClaims\Rules\" />
         <Folder Include="Features\ProgrammingFrameworks\Constants\" />
         <Folder Include="Features\ProgrammingLanguages\Constants\" />
+        <Folder Include="Features\UserOperationClaims\Rules\" />
+        <Folder Include="Features\Users\Commands\UpdateUser\" />
+        <Folder Include="Features\Users\Commands\DeleteUser\" />
+        <Folder Include="Features\Users\Dtos\Queries\" />
+        <Folder Include="Features\Users\Profiles\" />
+        <Folder Include="Features\Users\Queries\" />
     </ItemGroup>
 
     <ItemGroup>

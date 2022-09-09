@@ -6,13 +6,18 @@ using System.Linq.Expressions;
 
 namespace Core.Persistence.Repositories.ReadRepositories;
 
-public class EfReadRepositoryBase<TypeEntity, TypeContext> : EfRepositoryBase<TypeEntity, TypeContext>, IAsyncReadRepository<TypeEntity>, IReadRepository<TypeEntity> where TypeEntity : BaseEntity where TypeContext : DbContext
-{
+public class EfReadRepositoryBase<TypeEntity, TypeContext> : EfRepositoryBase<TypeEntity, TypeContext>, IAsyncReadRepository<TypeEntity>, IReadRepository<TypeEntity> where TypeEntity : BaseEntity where TypeContext : DbContext {
     public EfReadRepositoryBase(TypeContext context) : base(context) { }
 
-    public async Task<TypeEntity?> GetAsync(Expression<Func<TypeEntity, Boolean>> predicate)
-    {
-        return await Context.Set<TypeEntity>().FirstOrDefaultAsync(predicate);
+    public async Task<TypeEntity?> GetAsync(
+                                        Expression<Func<TypeEntity, Boolean>> predicate,
+                                        Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, Object>>? include = null
+        ) {
+        var entity = Query();
+        if(include is not null) {
+            entity = include(entity);
+        }
+        return await entity.FirstOrDefaultAsync(predicate);
     }
 
     public async Task<IPaginate<TypeEntity>> GetListAsync(
@@ -22,16 +27,15 @@ public class EfReadRepositoryBase<TypeEntity, TypeContext> : EfRepositoryBase<Ty
             Int32 index = 0, Int32 size = 10,
             Boolean enableTracking = true,
             CancellationToken cancellationToken = default
-        )
-    {
+        ) {
         IQueryable<TypeEntity> queryable = Query();
-        if (enableTracking is false)
+        if(enableTracking is false)
             queryable = queryable.AsNoTracking();
-        if (include is not null)
+        if(include is not null)
             queryable = include(queryable);
-        if (predicate is not null)
+        if(predicate is not null)
             queryable = queryable.Where(predicate);
-        if (orderBy is not null)
+        if(orderBy is not null)
             return await orderBy(queryable).ToPaginateAsync(index, size, 0, cancellationToken);
         return await queryable.ToPaginateAsync(index, size, 0, cancellationToken);
     }
@@ -42,23 +46,20 @@ public class EfReadRepositoryBase<TypeEntity, TypeContext> : EfRepositoryBase<Ty
                                                                     include = null,
                                                                 Int32 index = 0, Int32 size = 10,
                                                                 Boolean enableTracking = true,
-                                                                CancellationToken cancellationToken = default)
-    {
+                                                                CancellationToken cancellationToken = default) {
         IQueryable<TypeEntity> queryable = Query().AsQueryable().ToDynamic(dynamic);
-        if (enableTracking is false)
+        if(enableTracking is false)
             queryable = queryable.AsNoTracking();
-        if (include is not null)
+        if(include is not null)
             queryable = include(queryable);
         return await queryable.ToPaginateAsync(index, size, 0, cancellationToken);
     }
 
-    public IQueryable<TypeEntity> Query()
-    {
+    public IQueryable<TypeEntity> Query() {
         return Context.Set<TypeEntity>();
     }
 
-    public TypeEntity? Get(Expression<Func<TypeEntity, Boolean>> predicate)
-    {
+    public TypeEntity? Get(Expression<Func<TypeEntity, Boolean>> predicate) {
         return Context.Set<TypeEntity>().FirstOrDefault(predicate);
     }
 
@@ -66,16 +67,15 @@ public class EfReadRepositoryBase<TypeEntity, TypeContext> : EfRepositoryBase<Ty
                                       Func<IQueryable<TypeEntity>, IOrderedQueryable<TypeEntity>>? orderBy = null,
                                       Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, Object>>? include = null,
                                       Int32 index = 0, Int32 size = 10,
-                                      Boolean enableTracking = true)
-    {
+                                      Boolean enableTracking = true) {
         IQueryable<TypeEntity> queryable = Query();
-        if (enableTracking is false)
+        if(enableTracking is false)
             queryable = queryable.AsNoTracking();
-        if (include is not null)
+        if(include is not null)
             queryable = include(queryable);
-        if (predicate is not null)
+        if(predicate is not null)
             queryable = queryable.Where(predicate);
-        if (orderBy is not null)
+        if(orderBy is not null)
             return orderBy(queryable).ToPaginate(index, size);
         return queryable.ToPaginate(index, size);
     }
@@ -83,24 +83,21 @@ public class EfReadRepositoryBase<TypeEntity, TypeContext> : EfRepositoryBase<Ty
     public IPaginate<TypeEntity> GetListByDynamic(Dynamic.Dynamic dynamic,
                                                Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, Object>>?
                                                    include = null, Int32 index = 0, Int32 size = 10,
-                                               Boolean enableTracking = true)
-    {
+                                               Boolean enableTracking = true) {
         IQueryable<TypeEntity> queryable = Query().AsQueryable().ToDynamic(dynamic);
-        if (enableTracking is false)
+        if(enableTracking is false)
             queryable = queryable.AsNoTracking();
-        if (include is not null)
+        if(include is not null)
             queryable = include(queryable);
         return queryable.ToPaginate(index, size);
     }
 
     public async Task<TypeEntity?> GetByIdAsync(Guid id, Func<IQueryable<TypeEntity>, IIncludableQueryable<TypeEntity, Object>>? include = null, Boolean enableTracking = true) {
         var entity = Query();
-        if(enableTracking is false) {
+        if(enableTracking is false)
             entity = entity.AsNoTracking();
-        }
-        if(include is not null) {
+        if(include is not null)
             entity = include(entity);
-        }
-       return await entity.FirstOrDefaultAsync(x => x.Id.Equals(id));
+        return await entity.FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 }

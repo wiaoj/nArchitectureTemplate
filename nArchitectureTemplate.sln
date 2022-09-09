@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Mailing", "src\corePac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.ElasticSearch", "src\corePackages\Core.ElasticSearch\Core.ElasticSearch.csproj", "{80EAF006-EFE0-481E-BF99-632985424EF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistance", "src\corePackages\Core.Persistance\Core.Persistance.csproj", "{434DF425-1BBA-4A4A-893D-1BE298AF126A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistence", "src\corePackages\Core.Persistance\Core.Persistence.csproj", "{434DF425-1BBA-4A4A-893D-1BE298AF126A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Security", "src\corePackages\Core.Security\Core.Security.csproj", "{1B1F1778-1983-40F1-9DF0-A0A6EB898906}"
 EndProject

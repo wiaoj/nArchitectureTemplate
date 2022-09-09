@@ -3,7 +3,7 @@ using Core.Application.Requests;
 using Core.Persistence.Dynamic;
 using Core.Persistence.Paging;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Models;
-using Kodlama.io.Devs.Application.Services.ReadRepositories;
+using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
 using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
