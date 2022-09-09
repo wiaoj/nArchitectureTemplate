@@ -8,6 +8,7 @@ using MediatR;
 namespace Kodlama.io.Devs.Application.Features.SocialLinks.Commands.UpdateSocialLink;
 public class UpdateSocialLinkCommand : IRequest<UpdatedSocialLinkDto> {
     public Guid Id { get; set; }
+    public Guid UserId { get; set; }
     public String Name { get; set; }
     public String LinkUrl { get; set; }
 
