@@ -1,7 +1,7 @@
 ﻿namespace Kodlama.io.Devs.Persistence.ModelCreating;
 
-//internal class UserModel : IEntityTypeConfiguration<User> {
-//    public void Configure(EntityTypeBuilder<User> x) {
+//internal class ApplicationUserModel : IEntityTypeConfiguration<ApplicationUser> {
+//    public void Configure(EntityTypeBuilder<ApplicationUser> x) {
 //        x.ToTable("Users").HasKey(k => k.Id);
 //        x.Property(p => p.Id).HasColumnName("Id");
 //        x.Property(p => p.FirstName).HasColumnName("FirstName");
@@ -15,6 +15,9 @@
 //        {
 //            x.HasMany(x => x.UserOperationClaims);
 //            x.HasMany(x => x.RefreshTokens);
+//        }
+//        {
+//            x.HasMany(x => x.SocialLinks);
 //        }
 //    }
 //}

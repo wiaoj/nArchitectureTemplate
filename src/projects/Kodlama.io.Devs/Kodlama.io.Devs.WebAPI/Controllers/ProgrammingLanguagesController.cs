@@ -1,4 +1,5 @@
 ﻿using Core.Application.Requests;
+using Core.Persistence.Dynamic;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
@@ -7,6 +8,7 @@ using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos.Queries;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Models;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
+using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguageByDynamic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.Devs.WebAPI.Controllers;
@@ -35,6 +37,18 @@ public class ProgrammingLanguagesController : BaseController {
     [ProducesResponseType(typeof(UpdatedProgrammingLanguageDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> Update([FromBody] UpdateProgrammingLanguageCommand updateProgrammingLanguageCommand) {
         var result = await Mediator.Send(updateProgrammingLanguageCommand);
+        return Ok(result);
+    }
+
+    [HttpPost("[action]")]
+    [Produces("application/json")]
+    [ProducesResponseType(typeof(ProgrammingLanguageListModel), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic) {
+        GetListProgrammingLanguageByDynamicQuery getListProgrammingLanguageByDynamicQuery = new() {
+            PageRequest = pageRequest,
+            Dynamic = dynamic
+        };
+        ProgrammingLanguageListModel result = await Mediator.Send(getListProgrammingLanguageByDynamicQuery);
         return Ok(result);
     }
 

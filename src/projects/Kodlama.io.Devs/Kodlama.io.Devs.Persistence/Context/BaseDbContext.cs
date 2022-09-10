@@ -18,7 +18,7 @@ public class BaseDbContext : DbContext {
     public DbSet<ProgrammingFramework> ProgrammingFrameworks { get; set; }
     public DbSet<SocialLink> SocialLinks { get; set; }
 
-    public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+    public DbSet<ApplicationUser> Users { get; set; }
     public DbSet<OperationClaim> OperationClaims { get; set; }
     public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }

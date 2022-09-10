@@ -3,8 +3,8 @@ using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Common.Validati
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.CreateProgrammingFramework;
 
-public class CreateProgrammingFrameworkValidator : AbstractValidator<CreateProgrammingFrameworkCommand> {
-    public CreateProgrammingFrameworkValidator() {
+public class CreateUserOperationClaimValidator : AbstractValidator<CreateProgrammingFrameworkCommand> {
+    public CreateUserOperationClaimValidator() {
         RuleFor(x => x.Name).Name();
         RuleFor(x => x.Version).Version();
         RuleFor(x => x.Tag).Tag();

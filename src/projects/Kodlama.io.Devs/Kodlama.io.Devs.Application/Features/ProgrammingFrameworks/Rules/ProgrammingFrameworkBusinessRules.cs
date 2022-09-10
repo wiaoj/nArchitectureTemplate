@@ -9,7 +9,10 @@ internal class ProgrammingFrameworkBusinessRules {
     private readonly IProgrammingFrameworkReadRepository _programmingFrameworkReadRepository;
     private readonly ProgrammingLanguageBusinessRules _programmingLanguageBusinessRules;
 
-    public ProgrammingFrameworkBusinessRules(IProgrammingFrameworkReadRepository programmingFrameworkReadRepository, ProgrammingLanguageBusinessRules programmingLanguageBusinessRules) {
+    public ProgrammingFrameworkBusinessRules(
+        IProgrammingFrameworkReadRepository programmingFrameworkReadRepository, 
+        ProgrammingLanguageBusinessRules programmingLanguageBusinessRules
+        ) {
         _programmingFrameworkReadRepository = programmingFrameworkReadRepository;
         _programmingLanguageBusinessRules = programmingLanguageBusinessRules;
     }
@@ -33,10 +36,6 @@ internal class ProgrammingFrameworkBusinessRules {
     }
 
     public async Task ProgrammingFrameworkShouldExistWhenRequestProgrammingLanguageId(Guid programmingLanguageId) {
-        //ProgrammingLanguage? programmingLanguage = await _programmingLanguageReadRepository.GetByIdAsync(programmingLanguageId, enableTracking: false);
-        //if(programmingLanguage is null) {
-        //    throw new BusinessException("Requested programming language does not exists")
-        //}
         await _programmingLanguageBusinessRules.ProgrammingLanguageShouldExistWhenRequestId(programmingLanguageId);
     }
 }

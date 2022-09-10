@@ -6,6 +6,7 @@ using Kodlama.io.Devs.Application.Features.OperationClaims.Rules;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Rules;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.Devs.Application.Features.SocialLinks.Rules;
+using Kodlama.io.Devs.Application.Features.UserOperationClaims.Rules;
 using Kodlama.io.Devs.Application.Services.AuthService;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,13 +27,15 @@ public static class ApplicationServiceRegistration {
         //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
 
+        services.AddTransient<IAuthService, AuthService>();
         services.AddScoped<AuthorizationBusinessRules>();
+        services.AddScoped<OperationClaimBusinessRules>();
+        services.AddScoped<UserOperationClaimBusinessRules>();
+
         services.AddScoped<ProgrammingLanguageBusinessRules>();
         services.AddScoped<ProgrammingFrameworkBusinessRules>();
-        services.AddScoped<OperationClaimBusinessRules>();
         services.AddScoped<SocialLinkBusinessRules>();
 
-        services.AddTransient<IAuthService, AuthService>();
         return services;
     }
 }

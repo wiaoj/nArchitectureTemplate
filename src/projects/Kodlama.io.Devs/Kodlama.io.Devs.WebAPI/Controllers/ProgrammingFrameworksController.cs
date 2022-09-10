@@ -7,6 +7,7 @@ using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Queries;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Models;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Queries.GetByIdProgrammingFramework;
+using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Queries.GetListProgrammingFramework;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Queries.GetListProgrammingFrameworkByDynamic;
 using Microsoft.AspNetCore.Mvc;
 
@@ -77,10 +78,20 @@ public class ProgrammingFrameworksController : BaseController {
         return Ok(result);
     }
 
+    [HttpGet("[action]")]
+    [Produces("application/json")]
+    [ProducesResponseType(typeof(ProgrammingFrameworkListModel), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest) {
+        GetListProgrammingFrameworkQuery getListProgrammingFrameworkQuery = new() { PageRequest = pageRequest };
+        ProgrammingFrameworkListModel result = await Mediator.Send(getListProgrammingFrameworkQuery);
+        return Ok(result);
+    }
+
     [HttpGet("[action]/{Id:Guid}")]
     [Produces("application/json")]
     [ProducesResponseType(typeof(ProgrammingFrameworkGetByIdDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetById([FromRoute] GetByIdProgrammingFrameworkQuery getByIdProgrammingFrameworkQuery) {
         return Ok(await Mediator.Send(getByIdProgrammingFrameworkQuery));
     }
+
 }

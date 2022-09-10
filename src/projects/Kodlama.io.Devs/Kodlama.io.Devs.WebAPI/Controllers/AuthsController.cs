@@ -14,13 +14,14 @@ public class AuthsController : BaseController {
         }
         return HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString();
     }
+
     [HttpPost("[action]")]
     [Produces("application/json")]
     [ProducesResponseType(typeof(RegisteredDto), StatusCodes.Status201Created)]
-    public async Task<IActionResult> Register([FromBody] UserForRegisterDto registerCommand) {
+    public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto) {
         RegisteredDto registeredDto = await Mediator.Send(
             new RegisterCommand {
-                UserForRegisterDto = registerCommand,
+                Register = userForRegisterDto,
                 IpAddress = getIpAddress()
             });
         return Created("", registeredDto);
@@ -29,10 +30,10 @@ public class AuthsController : BaseController {
     [HttpPost("[action]")]
     [Produces("application/json")]
     [ProducesResponseType(typeof(RegisteredDto), StatusCodes.Status200OK)]
-    public async Task<IActionResult> Login([FromBody] UserForLoginDto loginQuery) {
+    public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto) {
         LoginedDto loginedDto = await Mediator.Send(
             new LoginQuery {
-                UserForLoginDto = loginQuery,
+                Login = userForLoginDto,
                 IpAddress = getIpAddress()
             });
         return Ok(loginedDto);

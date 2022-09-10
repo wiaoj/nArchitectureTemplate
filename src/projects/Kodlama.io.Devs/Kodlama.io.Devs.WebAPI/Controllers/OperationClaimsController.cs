@@ -39,17 +39,6 @@ public class OperationClaimsController : BaseController {
         return Ok(result);
     }
 
-
-    [HttpGet("[action]")]
-    [Produces("application/json")]
-    [ProducesResponseType(typeof(OperationClaimListModel), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest) {
-        GetListOperationClaimQuery getListOperationClaimQuery = new() { PageRequest = pageRequest };
-        OperationClaimListModel result = await Mediator.Send(getListOperationClaimQuery);
-        return Ok(result);
-    }
-
-
     [HttpPost("[action]")]
     [Produces("application/json")]
     [ProducesResponseType(typeof(OperationClaimListModel), StatusCodes.Status200OK)]
@@ -59,6 +48,15 @@ public class OperationClaimsController : BaseController {
             Dynamic = dynamic
         };
         OperationClaimListModel result = await Mediator.Send(getListOperationClaimByDynamicQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("[action]")]
+    [Produces("application/json")]
+    [ProducesResponseType(typeof(OperationClaimListModel), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest) {
+        GetListOperationClaimQuery getListOperationClaimQuery = new() { PageRequest = pageRequest };
+        OperationClaimListModel result = await Mediator.Send(getListOperationClaimQuery);
         return Ok(result);
     }
 }

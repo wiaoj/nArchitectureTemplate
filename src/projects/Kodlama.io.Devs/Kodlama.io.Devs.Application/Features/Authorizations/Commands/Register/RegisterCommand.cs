@@ -11,7 +11,7 @@ using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.Authorizations.Commands.Register;
 public class RegisterCommand : IRequest<RegisteredDto> {
-    public UserForRegisterDto UserForRegisterDto { get; set; }
+    public UserForRegisterDto Register { get; set; }
     public String IpAddress { get; set; }
 
     internal class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisteredDto> {
@@ -34,14 +34,14 @@ public class RegisterCommand : IRequest<RegisteredDto> {
 
         public async Task<RegisteredDto> Handle(RegisterCommand request, CancellationToken cancellationToken) {
 
-            await _authorizationBusinessRules.UserEmailShouldBeNotExists(request.UserForRegisterDto.Email);
+            await _authorizationBusinessRules.UserEmailShouldBeNotExists(request.Register.Email);
 
-            HashingHelper.CreatePasswordHash(request.UserForRegisterDto.Password, out Byte[] passwordHash, out Byte[] passwordSalt);
+            HashingHelper.CreatePasswordHash(request.Register.Password, out Byte[] passwordHash, out Byte[] passwordSalt);
 
             User user = new() {
-                Email = request.UserForRegisterDto.Email,
-                FirstName = request.UserForRegisterDto.FirstName,
-                LastName = request.UserForRegisterDto.LastName,
+                Email = request.Register.Email,
+                FirstName = request.Register.FirstName,
+                LastName = request.Register.LastName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 Status = true,

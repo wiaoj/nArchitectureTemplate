@@ -39,17 +39,6 @@ public class SocialLinksController : BaseController {
         return Ok(result);
     }
 
-
-    [HttpGet("[action]")]
-    [Produces("application/json")]
-    [ProducesResponseType(typeof(SocialLinkListModel), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest) {
-        GetListSocialLinkQuery getListSocialLinkQuery = new() { PageRequest = pageRequest };
-        SocialLinkListModel result = await Mediator.Send(getListSocialLinkQuery);
-        return Ok(result);
-    }
-
-
     [HttpPost("[action]")]
     [Produces("application/json")]
     [ProducesResponseType(typeof(SocialLinkListModel), StatusCodes.Status200OK)]
@@ -59,6 +48,15 @@ public class SocialLinksController : BaseController {
             Dynamic = dynamic
         };
         SocialLinkListModel result = await Mediator.Send(getListSocialLinkByDynamicQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("[action]")]
+    [Produces("application/json")]
+    [ProducesResponseType(typeof(SocialLinkListModel), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest) {
+        GetListSocialLinkQuery getListSocialLinkQuery = new() { PageRequest = pageRequest };
+        SocialLinkListModel result = await Mediator.Send(getListSocialLinkQuery);
         return Ok(result);
     }
 }

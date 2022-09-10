@@ -10,7 +10,7 @@ using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.Authorizations.Queries.Login;
 public class LoginQuery : IRequest<LoginedDto> {
-    public UserForLoginDto UserForLoginDto { get; set; }
+    public UserForLoginDto Login { get; set; }
     public String IpAddress { get; set; }
 
     internal class LoginQueryHandler : IRequestHandler<LoginQuery, LoginedDto> {
@@ -33,10 +33,10 @@ public class LoginQuery : IRequest<LoginedDto> {
 
         public async Task<LoginedDto> Handle(LoginQuery request, CancellationToken cancellationToken) {
             User? user = await _userReadRepository.GetAsync(
-                user => user.Email.Equals(request.UserForLoginDto.Email)
+                user => user.Email.Equals(request.Login.Email)
                 );
             await _authorizationBusinessRules.UserShouldBeExists(user);
-            await _authorizationBusinessRules.UserPasswordShouldBeMatch(user.Id, request.UserForLoginDto.Password);
+            await _authorizationBusinessRules.UserPasswordShouldBeMatch(user.Id, request.Login.Password);
 
             AccessToken accessToken = await _authService.CreateAccessToken(user);
             AccessTokenDto mappedAccessToken = _mapper.Map<AccessTokenDto>(accessToken);
