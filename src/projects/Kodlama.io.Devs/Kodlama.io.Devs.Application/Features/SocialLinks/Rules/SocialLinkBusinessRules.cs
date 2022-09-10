@@ -26,8 +26,7 @@ internal class SocialLinkBusinessRules {
     }
 
     public async Task SocialLinkShouldExistWhenRequestId(Guid id) {
-        SocialLink? programmingLanguage = await _socialLinkReadRepository.GetByIdAsync(id, enableTracking: false);
-        if(programmingLanguage is null)
-            throw new BusinessException("Social link does not exists.");
+        _ = await _socialLinkReadRepository.GetByIdAsync(id, enableTracking: false)
+            ?? throw new BusinessException("Social link does not exists.");
     }
 }

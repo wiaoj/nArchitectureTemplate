@@ -18,8 +18,7 @@ internal class OperationClaimBusinessRules {
     }
 
     public async Task OperationClaimShouldExistWhenRequestId(Guid id) {
-        OperationClaim? programmingLanguage = await _operationClaimReadRepository.GetByIdAsync(id, enableTracking: false);
-        if(programmingLanguage is null)
-            throw new BusinessException("Operation claim does not exists.");
+        _ = await _operationClaimReadRepository.GetByIdAsync(id, enableTracking: false)
+            ?? throw new BusinessException("Operation claim does not exists.");
     }
 }

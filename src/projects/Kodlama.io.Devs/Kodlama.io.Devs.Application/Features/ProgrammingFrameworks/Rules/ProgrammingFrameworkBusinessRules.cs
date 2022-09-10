@@ -30,9 +30,8 @@ internal class ProgrammingFrameworkBusinessRules {
     }
 
     public async Task ProgrammingFrameworkShouldExistWhenRequestId(Guid id) {
-        ProgrammingFramework? programmingFramework = await _programmingFrameworkReadRepository.GetByIdAsync(id, enableTracking: false);
-        if(programmingFramework is null)
-            throw new BusinessException("Requested programming framework does not exists.");
+        _= await _programmingFrameworkReadRepository.GetByIdAsync(id, enableTracking: false)
+           ?? throw new BusinessException("Requested programming framework does not exists.");
     }
 
     public async Task ProgrammingFrameworkShouldExistWhenRequestProgrammingLanguageId(Guid programmingLanguageId) {

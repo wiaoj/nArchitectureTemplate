@@ -36,7 +36,7 @@ public class LoginQuery : IRequest<LoginedDto> {
                 user => user.Email.Equals(request.Login.Email)
                 );
             await _authorizationBusinessRules.UserShouldBeExists(user);
-            await _authorizationBusinessRules.UserPasswordShouldBeMatch(user.Id, request.Login.Password);
+            await _authorizationBusinessRules.UserPasswordShouldBeMatch(user, request.Login.Password);
 
             AccessToken accessToken = await _authService.CreateAccessToken(user);
             AccessTokenDto mappedAccessToken = _mapper.Map<AccessTokenDto>(accessToken);

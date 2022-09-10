@@ -23,8 +23,7 @@ internal class AuthorizationBusinessRules {
             throw new BusinessException("User not found");
     }
 
-    public async Task UserPasswordShouldBeMatch(Guid id, String password) {
-        User? user = await _userReadRepository.GetAsync(u => u.Id == id);
+    public async Task UserPasswordShouldBeMatch(User user, String password) {
         if(HashingHelper.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt) is false)
             throw new BusinessException("Password is wrong");
     }

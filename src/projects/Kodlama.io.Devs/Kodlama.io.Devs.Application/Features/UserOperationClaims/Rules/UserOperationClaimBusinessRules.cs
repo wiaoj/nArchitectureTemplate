@@ -10,16 +10,12 @@ internal class UserOperationClaimBusinessRules {
     }
 
     public async Task UserOperationUserIdShouldExistWhenRequest(Guid userId) {
-        var result = await _userOperationClaimReadRepository.GetAsync(x => x.UserId.Equals(userId));
-        if(result is null) {
-            throw new BusinessException("Kullanıcı id yanlış");
-        }
+        _ = await _userOperationClaimReadRepository.GetAsync(x => x.UserId.Equals(userId))
+            ?? throw new BusinessException("User not found");
     }
 
     public async Task UserOperationClaimIdShouldExistWhenRequest(Guid operationId) {
-        var result = await _userOperationClaimReadRepository.GetAsync(x => x.OperationClaimId.Equals(operationId));
-        if(result is null) {
-            throw new BusinessException("Kullanıcı operasyon id yanlış");
-        }
+        _ = await _userOperationClaimReadRepository.GetAsync(x => x.OperationClaimId.Equals(operationId))
+            ?? throw new BusinessException("User claim not found");
     }
 }
