@@ -34,7 +34,7 @@ public class LoginQuery : IRequest<LoginedDto> {
 
         public async Task<LoginedDto> Handle(LoginQuery request, CancellationToken cancellationToken) {
             ApplicationUser? user = await _userReadRepository.GetAsync(
-                user => user.Email.Equals(request.Login.Email)
+                user => user.Email.ToLower().Equals(request.Login.Email.ToLower())
                 );
             await _authorizationBusinessRules.UserShouldBeExists(user);
             await _authorizationBusinessRules.UserPasswordShouldBeMatch(user, request.Login.Password);
