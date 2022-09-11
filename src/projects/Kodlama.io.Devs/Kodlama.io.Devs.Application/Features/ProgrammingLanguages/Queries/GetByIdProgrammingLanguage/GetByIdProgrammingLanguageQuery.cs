@@ -4,6 +4,7 @@ using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
 using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 public class GetByIdProgrammingLanguageQuery : IRequest<ProgrammingLanguageGetByIdDto> {
@@ -25,7 +26,10 @@ public class GetByIdProgrammingLanguageQuery : IRequest<ProgrammingLanguageGetBy
         }
 
         public async Task<ProgrammingLanguageGetByIdDto> Handle(GetByIdProgrammingLanguageQuery request, CancellationToken cancellationToken) {
-            ProgrammingLanguage? programmingLanguage = await _programmingLanguageReadRepository.GetByIdAsync(request.Id, enableTracking: false);
+            ProgrammingLanguage? programmingLanguage = await _programmingLanguageReadRepository.GetByIdAsync(
+                request.Id, include: x => x.Include(l => l.ProgrammingFrameworks),
+                enableTracking: false
+                );
             await _programmingLanguageBusinessRules.ProgrammingLanguageShouldExistWhenRequest(programmingLanguage);
             ProgrammingLanguageGetByIdDto programmingLanguageGetByIdDto = _mapper.Map<ProgrammingLanguageGetByIdDto>(programmingLanguage);
             return programmingLanguageGetByIdDto;

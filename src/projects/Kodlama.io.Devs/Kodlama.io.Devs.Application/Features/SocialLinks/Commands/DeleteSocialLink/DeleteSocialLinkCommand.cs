@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Kodlama.io.Devs.Application.Features.SocialLinks.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.SocialLinks.Rules;
 using Kodlama.io.Devs.Application.Services.Repositories.WriteRepositories;
@@ -6,8 +7,10 @@ using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.SocialLinks.Commands.DeleteSocialLink;
-public class DeleteSocialLinkCommand : IRequest<DeletedSocialLinkDto> {
+public class DeleteSocialLinkCommand : IRequest<DeletedSocialLinkDto>, ISecuredRequest {
     public Guid Id { get; set; }
+
+    public String[] Roles { get; } = { "Admin", "User" };
 
     internal class DeleteSocialLinkCommandHandler : IRequestHandler<DeleteSocialLinkCommand, DeletedSocialLinkDto> {
         private readonly ISocialLinkWriteRepository _socialLinkWriteRepository;
