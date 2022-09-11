@@ -31,8 +31,8 @@ public class GetListProgrammingLanguageByDynamicQuery : IRequest<ProgrammingLang
                  size: request.PageRequest.PageSize
                  );
 
-            ProgrammingLanguageListModel mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguageListModel>(programmingLanguage);
-            return mappedProgrammingLanguage;
+            ProgrammingLanguageListModel mappedProgrammingLanguageModel = _mapper.Map<ProgrammingLanguageListModel>(programmingLanguage);
+            return mappedProgrammingLanguageModel;
         }
     }
 }

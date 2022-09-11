@@ -1,5 +1,5 @@
 ﻿namespace Kodlama.io.Devs.Application.Features.OperationClaims.Dtos.Commands;
 
-public class DeletedOperationClaimDto {
+public record DeletedOperationClaimDto {
     public Guid Id { get; set; }
 }

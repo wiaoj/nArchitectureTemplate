@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Core.Application.Requests;
+using Core.Persistence.Paging;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Models;
 using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
+using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,16 +21,16 @@ public class GetListProgrammingFrameworkQuery : IRequest<ProgrammingFrameworkLis
         }
 
         public async Task<ProgrammingFrameworkListModel> Handle(GetListProgrammingFrameworkQuery request, CancellationToken cancellationToken) {
-            var entities = await _programmingFrameworkReadRepository.GetListAsync(
+            IPaginate<ProgrammingFramework> programmingFrameworks = await _programmingFrameworkReadRepository.GetListAsync(
                             index: request.PageRequest.Page,
                             size: request.PageRequest.PageSize,
                             include: x => x.Include(l => l.ProgrammingLanguage),
                             enableTracking: false,
                             cancellationToken: cancellationToken
                             );
-            ProgrammingFrameworkListModel mappedEntitiesModel = _mapper.Map<ProgrammingFrameworkListModel>(entities);
+            ProgrammingFrameworkListModel mappedProgrammingFrameworksModel = _mapper.Map<ProgrammingFrameworkListModel>(programmingFrameworks);
 
-            return mappedEntitiesModel;
+            return mappedProgrammingFrameworksModel;
         }
     }
 }

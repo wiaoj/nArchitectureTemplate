@@ -2,10 +2,11 @@
 using Core.Security.Dtos;
 using Core.Security.Entities;
 using Core.Security.JWT;
-using Kodlama.io.Devs.Application.Features.Authorizations.Dtos.Commands;
+using Kodlama.io.Devs.Application.Features.Authorizations.Dtos;
 using Kodlama.io.Devs.Application.Features.Authorizations.Rules;
 using Kodlama.io.Devs.Application.Services.AuthService;
 using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
+using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.Authorizations.Queries.Login;
@@ -32,7 +33,7 @@ public class LoginQuery : IRequest<LoginedDto> {
         }
 
         public async Task<LoginedDto> Handle(LoginQuery request, CancellationToken cancellationToken) {
-            User? user = await _userReadRepository.GetAsync(
+            ApplicationUser? user = await _userReadRepository.GetAsync(
                 user => user.Email.Equals(request.Login.Email)
                 );
             await _authorizationBusinessRules.UserShouldBeExists(user);

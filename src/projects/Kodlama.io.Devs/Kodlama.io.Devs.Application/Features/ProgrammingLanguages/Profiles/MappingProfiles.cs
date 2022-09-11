@@ -23,6 +23,8 @@ internal class MappingProfiles : Profile {
         CreateMap<ProgrammingLanguage, ProgrammingLanguageListDto>().ReverseMap();
         CreateMap<IPaginate<ProgrammingLanguage>, ProgrammingLanguageListModel>().ReverseMap();
 
-        CreateMap<ProgrammingLanguage, ProgrammingLanguageGetByIdDto>().ReverseMap();
+        CreateMap<ProgrammingLanguage, ProgrammingLanguageGetByIdDto>()
+            .ForMember(x => x.Frameworks, option => option.MapFrom(x => x.ProgrammingFrameworks))
+            .ReverseMap();
     }
 }

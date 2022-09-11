@@ -18,20 +18,22 @@ public class GetListUserOperationClaimByDynamicQuery : IRequest<UserOperationCla
 
         public GetListUserOperationClaimByDynamicQueryHandler(
             IUserOperationClaimReadRepository userOperationClaimReadRepository,
-            IMapper mapper) {
+            IMapper mapper
+            ) {
             _userOperationClaimReadRepository = userOperationClaimReadRepository;
             _mapper = mapper;
         }
 
         public async Task<UserOperationClaimListModel> Handle(GetListUserOperationClaimByDynamicQuery request, CancellationToken cancellationToken) {
             IPaginate<UserOperationClaim> socialLinks = await _userOperationClaimReadRepository.GetListByDynamicAsync(
-                 dynamic: request.Dynamic,
-                 index: request.PageRequest.Page,
-                 size: request.PageRequest.PageSize
-                 );
+                dynamic: request.Dynamic, 
+                index: request.PageRequest.Page, 
+                size: request.PageRequest.PageSize,
+                cancellationToken: cancellationToken
+                );
 
-            UserOperationClaimListModel mappedSocialLinks = _mapper.Map<UserOperationClaimListModel>(socialLinks);
-            return mappedSocialLinks;
+            UserOperationClaimListModel mappedSocialLinksModel = _mapper.Map<UserOperationClaimListModel>(socialLinks);
+            return mappedSocialLinksModel;
         }
     }
 }

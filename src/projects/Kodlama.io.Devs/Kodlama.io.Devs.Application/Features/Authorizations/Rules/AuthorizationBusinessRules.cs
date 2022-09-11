@@ -2,6 +2,7 @@
 using Core.Security.Entities;
 using Core.Security.Hashing;
 using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
+using Kodlama.io.Devs.Domain.Entities;
 
 namespace Kodlama.io.Devs.Application.Features.Authorizations.Rules;
 internal class AuthorizationBusinessRules {
@@ -13,17 +14,16 @@ internal class AuthorizationBusinessRules {
     }
 
     public async Task UserEmailShouldBeNotExists(String email) {
-        User? user = await _userReadRepository.GetAsync(u => (u.Email).ToLower().Equals(email.ToLower()));
+        ApplicationUser? user = await _userReadRepository.GetAsync(u => u.Email.ToLower().Equals(email.ToLower()));
         if(user is not null)
             throw new BusinessException("User mail already exists");
     }
 
-    public async Task UserShouldBeExists(User? user) {
-        if(user is null)
-            throw new BusinessException("User not found");
+    public async Task UserShouldBeExists(ApplicationUser? user) {
+        _ = user ?? throw new BusinessException("User not found");
     }
 
-    public async Task UserPasswordShouldBeMatch(User user, String password) {
+    public async Task UserPasswordShouldBeMatch(ApplicationUser user, String password) {
         if(HashingHelper.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt) is false)
             throw new BusinessException("Password is wrong");
     }

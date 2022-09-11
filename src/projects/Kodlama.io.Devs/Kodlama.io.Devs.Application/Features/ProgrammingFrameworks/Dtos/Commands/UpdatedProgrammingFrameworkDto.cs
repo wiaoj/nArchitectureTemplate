@@ -1,6 +1,6 @@
 ﻿namespace Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Commands;
 
-public class UpdatedProgrammingFrameworkDto {
+public record UpdatedProgrammingFrameworkDto {
     public Guid Id { get; set; }
     public String Name { get; set; }
     public Double Version { get; set; }

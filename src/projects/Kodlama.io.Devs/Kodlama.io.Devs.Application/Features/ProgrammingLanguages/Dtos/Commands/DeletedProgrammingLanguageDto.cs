@@ -1,6 +1,5 @@
 ﻿namespace Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Dtos.Commands;
 
-public class DeletedProgrammingLanguageDto {
+public record DeletedProgrammingLanguageDto {
     public Guid Id { get; set; }
-    //public String Name { get; set; }
 }

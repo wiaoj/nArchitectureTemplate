@@ -1,6 +1,6 @@
 ﻿namespace Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Queries;
 
-public class ProgrammingFrameworkGetByIdDto {
+public record ProgrammingFrameworkGetByIdDto {
     public Guid Id { get; set; }
     public String Name { get; set; }
     public String ProgrammingLanguageName { get; set; }

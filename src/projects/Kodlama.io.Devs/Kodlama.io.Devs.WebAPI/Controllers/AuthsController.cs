@@ -1,10 +1,11 @@
 ﻿using Core.Security.Dtos;
 using Kodlama.io.Devs.Application.Features.Authorizations.Commands.Register;
-using Kodlama.io.Devs.Application.Features.Authorizations.Dtos.Commands;
+using Kodlama.io.Devs.Application.Features.Authorizations.Dtos;
 using Kodlama.io.Devs.Application.Features.Authorizations.Queries.Login;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.Devs.WebAPI.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
 public class AuthsController : BaseController {

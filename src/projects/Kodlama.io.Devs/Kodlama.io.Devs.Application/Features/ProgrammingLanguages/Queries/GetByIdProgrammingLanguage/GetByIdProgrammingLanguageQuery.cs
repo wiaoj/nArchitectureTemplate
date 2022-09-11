@@ -26,11 +26,13 @@ public class GetByIdProgrammingLanguageQuery : IRequest<ProgrammingLanguageGetBy
         }
 
         public async Task<ProgrammingLanguageGetByIdDto> Handle(GetByIdProgrammingLanguageQuery request, CancellationToken cancellationToken) {
+            await _programmingLanguageBusinessRules.ProgrammingLanguageShouldExistWhenRequestId(request.Id);
+
             ProgrammingLanguage? programmingLanguage = await _programmingLanguageReadRepository.GetByIdAsync(
                 request.Id, include: x => x.Include(l => l.ProgrammingFrameworks),
                 enableTracking: false
                 );
-            await _programmingLanguageBusinessRules.ProgrammingLanguageShouldExistWhenRequest(programmingLanguage);
+
             ProgrammingLanguageGetByIdDto programmingLanguageGetByIdDto = _mapper.Map<ProgrammingLanguageGetByIdDto>(programmingLanguage);
             return programmingLanguageGetByIdDto;
         }

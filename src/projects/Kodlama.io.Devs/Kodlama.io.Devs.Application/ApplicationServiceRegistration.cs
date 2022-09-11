@@ -7,6 +7,7 @@ using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Rules;
 using Kodlama.io.Devs.Application.Features.ProgrammingLanguages.Rules;
 using Kodlama.io.Devs.Application.Features.SocialLinks.Rules;
 using Kodlama.io.Devs.Application.Features.UserOperationClaims.Rules;
+using Kodlama.io.Devs.Application.Features.Users.Rules;
 using Kodlama.io.Devs.Application.Services.AuthService;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,7 @@ public static class ApplicationServiceRegistration {
         services.AddScoped<ProgrammingLanguageBusinessRules>();
         services.AddScoped<ProgrammingFrameworkBusinessRules>();
         services.AddScoped<SocialLinkBusinessRules>();
+        services.AddScoped<UserBusinessRules>();
 
         return services;
     }

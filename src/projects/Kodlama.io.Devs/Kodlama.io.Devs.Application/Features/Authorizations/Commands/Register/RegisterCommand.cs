@@ -3,10 +3,11 @@ using Core.Security.Dtos;
 using Core.Security.Entities;
 using Core.Security.Hashing;
 using Core.Security.JWT;
-using Kodlama.io.Devs.Application.Features.Authorizations.Dtos.Commands;
+using Kodlama.io.Devs.Application.Features.Authorizations.Dtos;
 using Kodlama.io.Devs.Application.Features.Authorizations.Rules;
 using Kodlama.io.Devs.Application.Services.AuthService;
 using Kodlama.io.Devs.Application.Services.Repositories.WriteRepositories;
+using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.Authorizations.Commands.Register;
@@ -38,7 +39,7 @@ public class RegisterCommand : IRequest<RegisteredDto> {
 
             HashingHelper.CreatePasswordHash(request.Register.Password, out Byte[] passwordHash, out Byte[] passwordSalt);
 
-            User user = new() {
+            ApplicationUser user = new() {
                 Email = request.Register.Email,
                 FirstName = request.Register.FirstName,
                 LastName = request.Register.LastName,
@@ -48,8 +49,8 @@ public class RegisterCommand : IRequest<RegisteredDto> {
                 AuthenticatorType = Core.Security.Enums.AuthenticatorType.None
             };
 
-            User addedUser = await _userWriteRepository.AddAsync(user);
-
+            ApplicationUser addedUser = await _userWriteRepository.AddAsync(user);
+            //kullanıcı yetkisi eklenecek
             AccessToken accessToken = await _authService.CreateAccessToken(addedUser);
             AccessTokenDto mappedAccessToken = _mapper.Map<AccessTokenDto>(accessToken);
 

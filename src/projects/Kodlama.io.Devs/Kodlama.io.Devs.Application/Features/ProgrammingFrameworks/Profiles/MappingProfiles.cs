@@ -28,5 +28,7 @@ public class MappingProfiles : Profile {
         CreateMap<ProgrammingFramework, ProgrammingFrameworkGetByIdDto>()
             .ForMember(x => x.ProgrammingLanguageName, option => option.MapFrom(x => x.ProgrammingLanguage.Name))
             .ReverseMap();
+
+        CreateMap<ProgrammingFramework, ProgrammingFrameworkGetByProgrammingLanguageDto>().ReverseMap();
     }
 }
