@@ -50,6 +50,8 @@ public class RegisterCommand : IRequest<RegisteredDto> {
             };
 
             ApplicationUser addedUser = await _userWriteRepository.AddAsync(user);
+
+            await _authService.CreateUserClaim(user);
             //kullanıcı yetkisi eklenecek
             AccessToken accessToken = await _authService.CreateAccessToken(addedUser);
             AccessTokenDto mappedAccessToken = _mapper.Map<AccessTokenDto>(accessToken);

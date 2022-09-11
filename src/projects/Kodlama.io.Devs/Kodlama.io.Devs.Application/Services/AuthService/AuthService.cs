@@ -9,14 +9,21 @@ namespace Kodlama.io.Devs.Application.Services.AuthService;
 
 public class AuthService : IAuthService {
     private readonly IUserOperationClaimReadRepository _userOperationClaimReadRepository;
+    private readonly IUserOperationClaimWriteRepository _userOperationClaimWriteRepository;
+    private readonly IOperationClaimReadRepository _operationClaimReadRepository;
     private readonly ITokenHelper _tokenHelper;
     private readonly IRefreshTokenWriteRepository _refreshTokenWriteRepository;
 
     public AuthService(
         IUserOperationClaimReadRepository userOperationClaimReadRepository,
-        ITokenHelper tokenHelper, IRefreshTokenWriteRepository refreshTokenWriteRepository
+        IUserOperationClaimWriteRepository userOperationClaimWriteRepository,
+        IOperationClaimReadRepository operationClaimReadRepository,
+        ITokenHelper tokenHelper,
+        IRefreshTokenWriteRepository refreshTokenWriteRepository
         ) {
         _userOperationClaimReadRepository = userOperationClaimReadRepository;
+        _userOperationClaimWriteRepository = userOperationClaimWriteRepository;
+        _operationClaimReadRepository = operationClaimReadRepository;
         _tokenHelper = tokenHelper;
         _refreshTokenWriteRepository = refreshTokenWriteRepository;
     }
@@ -42,5 +49,14 @@ public class AuthService : IAuthService {
     public Task<RefreshToken> CreateRefreshToken(User user, String ipAddress) {
         RefreshToken refreshToken = _tokenHelper.CreateRefreshToken(user, ipAddress);
         return Task.FromResult(refreshToken);
+    }
+
+    public async Task CreateUserClaim(User user) {
+        OperationClaim operationClaim = await _operationClaimReadRepository.GetAsync(x => x.Name.Equals("User"));
+
+        await _userOperationClaimWriteRepository.AddAsync(new UserOperationClaim {
+            UserId = user.Id,
+            OperationClaimId = operationClaim.Id
+        });
     }
 }
