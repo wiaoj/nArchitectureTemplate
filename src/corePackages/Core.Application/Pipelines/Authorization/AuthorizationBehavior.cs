@@ -18,11 +18,12 @@ public class AuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TReq
                                         RequestHandlerDelegate<TResponse> next) {
         List<String>? roleClaims = _httpContextAccessor.HttpContext.User.ClaimRoles();
 
-        if(roleClaims is null)
-            throw new AuthorizationException("Claims not found.");
+        _ = roleClaims ?? throw new AuthorizationException("Claims not found");
 
-        Boolean isNotMatchedARoleClaimWithRequestRoles =
-            roleClaims.FirstOrDefault(roleClaim => request.Roles.Any(role => role.Equals(roleClaim))).IsNullOrEmpty();
+        Boolean isNotMatchedARoleClaimWithRequestRoles = roleClaims.FirstOrDefault(
+            roleClaim => request.Roles.Any(
+                role => role.Equals(roleClaim))).IsNullOrEmpty();
+
         if(isNotMatchedARoleClaimWithRequestRoles)
             throw new AuthorizationException("You are not authorized.");
 

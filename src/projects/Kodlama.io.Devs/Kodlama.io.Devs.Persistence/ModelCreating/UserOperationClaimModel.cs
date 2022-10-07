@@ -11,6 +11,8 @@ internal class UserOperationClaimModel : IEntityTypeConfiguration<UserOperationC
         x.Property(p => p.OperationClaimId).HasColumnName("OperationClaimId");
         x.Property(p => p.UserId).HasColumnName("UserId");
 
+        x.Ignore(p => p.CreatedDate);
+        x.Ignore(p => p.UpdatedDate);
         {
             x.HasOne(x => x.User);
             x.HasOne(x => x.OperationClaim);

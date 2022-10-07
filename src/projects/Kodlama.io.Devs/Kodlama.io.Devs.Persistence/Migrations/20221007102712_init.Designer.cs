@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kodlama.io.Devs.Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20220910102157_migtest_2")]
-    partial class migtest_2
+    [Migration("20221007102712_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,16 +31,10 @@ namespace Kodlama.io.Devs.Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -49,10 +43,13 @@ namespace Kodlama.io.Devs.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a921122e-6f50-4128-8fdf-8ad11bba3656"),
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "User",
-                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            Id = new Guid("32fb4dca-23ec-474a-81d8-09a6962c46e9"),
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("e3d329f6-2e42-42a1-8ca4-2839ec0dc191"),
+                            Name = "User"
                         });
                 });
 
@@ -152,9 +149,7 @@ namespace Kodlama.io.Devs.Persistence.Migrations
                         .HasColumnName("PasswordSalt");
 
                     b.Property<bool>("Status")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(true)
                         .HasColumnName("Status");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -174,15 +169,9 @@ namespace Kodlama.io.Devs.Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<Guid>("OperationClaimId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("OperationClaimId");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier")
@@ -237,60 +226,60 @@ namespace Kodlama.io.Devs.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("617663e5-62a2-47ac-817e-c727b63edfde"),
+                            Id = new Guid("3e729906-39df-4a20-94d8-edf5ff3d264e"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Spring",
-                            ProgrammingLanguageId = new Guid("0da5e8ea-c337-446c-b176-b42608ad87b3"),
+                            ProgrammingLanguageId = new Guid("c3b23103-9406-4839-922c-1302db1c79af"),
                             Tag = "latest",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Version = 3.0
                         },
                         new
                         {
-                            Id = new Guid("2241c8f5-24c9-4922-ac87-c4f541baa745"),
+                            Id = new Guid("a0a3f801-a030-478d-876a-44edaefae921"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "JSP",
-                            ProgrammingLanguageId = new Guid("0da5e8ea-c337-446c-b176-b42608ad87b3"),
+                            ProgrammingLanguageId = new Guid("c3b23103-9406-4839-922c-1302db1c79af"),
                             Tag = "latest",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Version = 2.0
                         },
                         new
                         {
-                            Id = new Guid("a68f8594-8b91-4059-8236-c8d123d1b3ca"),
+                            Id = new Guid("e8c55231-dcbb-460c-80a2-e6765a764af0"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "WPF",
-                            ProgrammingLanguageId = new Guid("39366eae-6015-4c56-91cd-70d5a91af68b"),
+                            ProgrammingLanguageId = new Guid("de1c00c5-9fee-4d22-ae2d-b1d845257743"),
                             Tag = "latest",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Version = 7.0
                         },
                         new
                         {
-                            Id = new Guid("cecdf6ca-8a64-4a48-805b-391ccc3fabd1"),
+                            Id = new Guid("6d8b1cdd-05f7-4bdc-9cb3-c7beb14292cd"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "ASP.NET",
-                            ProgrammingLanguageId = new Guid("39366eae-6015-4c56-91cd-70d5a91af68b"),
+                            ProgrammingLanguageId = new Guid("de1c00c5-9fee-4d22-ae2d-b1d845257743"),
                             Tag = "latest",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Version = 6.0
                         },
                         new
                         {
-                            Id = new Guid("63fa246d-62ff-4f60-80b2-a2379dcc8fbb"),
+                            Id = new Guid("a9651b86-89f7-41d1-9ed4-256eb479356d"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Angular",
-                            ProgrammingLanguageId = new Guid("da858610-8401-43be-a247-13004de7265d"),
+                            ProgrammingLanguageId = new Guid("404a6171-5479-418c-9540-80427c33df9c"),
                             Tag = "latest",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Version = 14.0
                         },
                         new
                         {
-                            Id = new Guid("5df28235-f573-42e2-acc5-c56b7ad6440e"),
+                            Id = new Guid("92c16437-c671-4ad9-b541-938d8191abc9"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "React",
-                            ProgrammingLanguageId = new Guid("da858610-8401-43be-a247-13004de7265d"),
+                            ProgrammingLanguageId = new Guid("404a6171-5479-418c-9540-80427c33df9c"),
                             Tag = "latest",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Version = 5.0
@@ -322,28 +311,28 @@ namespace Kodlama.io.Devs.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0da5e8ea-c337-446c-b176-b42608ad87b3"),
+                            Id = new Guid("c3b23103-9406-4839-922c-1302db1c79af"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Java",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("39366eae-6015-4c56-91cd-70d5a91af68b"),
+                            Id = new Guid("de1c00c5-9fee-4d22-ae2d-b1d845257743"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "C#",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("94c64181-4374-4147-869a-80d06bda2360"),
+                            Id = new Guid("72d376a9-9ff4-4739-a488-88a47255c952"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Python",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("da858610-8401-43be-a247-13004de7265d"),
+                            Id = new Guid("404a6171-5479-418c-9540-80427c33df9c"),
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "JavaScript",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)

@@ -13,18 +13,20 @@ internal class AuthorizationBusinessRules {
         _userReadRepository = userReadRepository;
     }
 
-    public async Task UserEmailShouldBeNotExists(String email) {
+    public async Task EmailCanNotBeDuplicatedWhenRegistered(String email) {
         ApplicationUser? user = await _userReadRepository.GetAsync(u => u.Email.ToLower().Equals(email.ToLower()));
         if(user is not null)
-            throw new BusinessException("User mail already exists");
+            throw new BusinessException("Mail already exists");
     }
 
-    public async Task UserShouldBeExists(ApplicationUser? user) {
+    public Task UserShouldBeExists(ApplicationUser? user) {
         _ = user ?? throw new BusinessException("User not found");
+        return Task.CompletedTask;
     }
 
-    public async Task UserPasswordShouldBeMatch(ApplicationUser user, String password) {
+    public Task UserPasswordShouldBeMatch(ApplicationUser user, String password) {
         if(HashingHelper.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt) is false)
             throw new BusinessException("Password is wrong");
+        return Task.CompletedTask;
     }
 }

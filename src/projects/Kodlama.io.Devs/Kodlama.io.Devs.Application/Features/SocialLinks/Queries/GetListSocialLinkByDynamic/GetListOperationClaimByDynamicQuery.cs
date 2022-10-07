@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Application.Requests;
 using Core.Persistence.Dynamic;
 using Core.Persistence.Paging;
@@ -8,9 +9,11 @@ using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.SocialLinks.Queries.GetListSocialLinkByDynamic;
-public class GetListSocialLinkByDynamicQuery : IRequest<SocialLinkListModel> {
+public class GetListSocialLinkByDynamicQuery : IRequest<SocialLinkListModel>, ISecuredRequest {
     public PageRequest PageRequest { get; set; }
     public Dynamic Dynamic { get; set; }
+
+    public String[] Roles { get; } = { "Admin", "User" };
 
     public class GetListSocialLinkByDynamicQueryHandler : IRequestHandler<GetListSocialLinkByDynamicQuery, SocialLinkListModel> {
         private readonly ISocialLinkReadRepository _socialLinkReadRepository;

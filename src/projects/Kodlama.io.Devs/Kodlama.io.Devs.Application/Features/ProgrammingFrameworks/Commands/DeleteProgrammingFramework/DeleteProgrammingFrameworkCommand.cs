@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Rules;
 using Kodlama.io.Devs.Application.Services.Repositories.WriteRepositories;
@@ -6,15 +7,21 @@ using Kodlama.io.Devs.Domain.Entities;
 using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.ProgrammingFrameworks.Commands.DeleteProgrammingFramework;
-public class DeleteProgrammingFrameworkCommand : IRequest<DeletedProgrammingFrameworkDto> {
+public class DeleteProgrammingFrameworkCommand : IRequest<DeletedProgrammingFrameworkDto>, ISecuredRequest {
     public Guid Id { get; set; }
+
+    public String[] Roles { get; } = { "Admin" };
 
     internal class DeleteProgrammingFrameworkCommandHandler : IRequestHandler<DeleteProgrammingFrameworkCommand, DeletedProgrammingFrameworkDto> {
         private readonly IProgrammingFrameworkWriteRepository _programmingFrameworkWriteRepository;
         private readonly IMapper _mapper;
         private readonly ProgrammingFrameworkBusinessRules _programmingFrameworkBusinessRules;
 
-        public DeleteProgrammingFrameworkCommandHandler(IProgrammingFrameworkWriteRepository programmingFrameworkWriteRepository, IMapper mapper, ProgrammingFrameworkBusinessRules programmingFrameworkBusinessRules) {
+        public DeleteProgrammingFrameworkCommandHandler(
+            IProgrammingFrameworkWriteRepository programmingFrameworkWriteRepository, 
+            IMapper mapper, 
+            ProgrammingFrameworkBusinessRules programmingFrameworkBusinessRules
+            ) {
             _programmingFrameworkWriteRepository = programmingFrameworkWriteRepository;
             _mapper = mapper;
             _programmingFrameworkBusinessRules = programmingFrameworkBusinessRules;

@@ -46,15 +46,15 @@ public class AuthService : IAuthService {
         return accessToken;
     }
 
-    public Task<RefreshToken> CreateRefreshToken(User user, String ipAddress) {
+    public async Task<RefreshToken> CreateRefreshToken(User user, String ipAddress) {
         RefreshToken refreshToken = _tokenHelper.CreateRefreshToken(user, ipAddress);
-        return Task.FromResult(refreshToken);
+        return await Task.FromResult(refreshToken);
     }
 
     public async Task CreateUserClaim(User user) {
-        OperationClaim operationClaim = await _operationClaimReadRepository.GetAsync(x => x.Name.Equals("User"));
+        OperationClaim? operationClaim = await _operationClaimReadRepository.GetAsync(x => x.Name.Equals("User"));
 
-        await _userOperationClaimWriteRepository.AddAsync(new UserOperationClaim {
+        await _userOperationClaimWriteRepository.AddAsync(new() {
             UserId = user.Id,
             OperationClaimId = operationClaim.Id
         });

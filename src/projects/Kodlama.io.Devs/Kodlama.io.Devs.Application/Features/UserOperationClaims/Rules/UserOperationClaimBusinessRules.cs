@@ -8,13 +8,17 @@ internal class UserOperationClaimBusinessRules {
     public UserOperationClaimBusinessRules(IUserOperationClaimReadRepository userOperationClaimReadRepository) {
         _userOperationClaimReadRepository = userOperationClaimReadRepository;
     }
+    public async Task UserOperationClaimShouldExistWhenRequestId(Guid id) {
+        _ = await _userOperationClaimReadRepository.GetByIdAsync(id, enableTracking: false)
+           ?? throw new BusinessException("User operation claim not found");
+    }
 
-    public async Task UserOperationUserIdShouldExistWhenRequest(Guid userId) {
+    public async Task UserOperationClaimUserIdShouldExistWhenRequest(Guid userId) {
         _ = await _userOperationClaimReadRepository.GetAsync(x => x.UserId.Equals(userId))
             ?? throw new BusinessException("User not found");
     }
 
-    public async Task UserOperationClaimIdShouldExistWhenRequest(Guid operationId) {
+    public async Task UserOperationClaimClaimIdShouldExistWhenRequest(Guid operationId) {
         _ = await _userOperationClaimReadRepository.GetAsync(x => x.OperationClaimId.Equals(operationId))
             ?? throw new BusinessException("User claim not found");
     }

@@ -6,6 +6,7 @@ using Kodlama.io.Devs.Application.Features.UserOperationClaims.Commands.UpdateUs
 using Kodlama.io.Devs.Application.Features.UserOperationClaims.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.UserOperationClaims.Models;
 using Kodlama.io.Devs.Application.Features.UserOperationClaims.Queries.GetListUserOperationClaimByDynamic;
+using Kodlama.io.Devs.Application.Features.UserOperationClaims.Queries.GetListUserOperationClaimByUserId;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kodlama.io.Devs.WebAPI.Controllers;
@@ -35,6 +36,14 @@ public class UserUserOperationClaimsController : BaseController {
     [ProducesResponseType(typeof(UpdatedUserOperationClaimDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> Update([FromBody] UpdateUserOperationClaimCommand updateUserOperationClaimCommand) {
         var result = await Mediator.Send(updateUserOperationClaimCommand);
+        return Ok(result);
+    }
+
+    [HttpGet("[action]")]
+    [Produces("application/json")]
+    [ProducesResponseType(typeof(UserOperationClaimListModel), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetClaimListByUserId([FromQuery] GetListUserOperationClaimByUserIdQuery getListUserOperationClaimByUserIdQuery) {
+        UserOperationClaimListModel result = await Mediator.Send(getListUserOperationClaimByUserIdQuery);
         return Ok(result);
     }
 

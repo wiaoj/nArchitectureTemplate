@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Security.Entities;
 using Kodlama.io.Devs.Application.Features.OperationClaims.Dtos.Commands;
 using Kodlama.io.Devs.Application.Features.OperationClaims.Rules;
@@ -6,9 +7,11 @@ using Kodlama.io.Devs.Application.Services.Repositories.WriteRepositories;
 using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.OperationClaims.Commands.UpdateOperationClaim;
-public class UpdateOperationClaimCommand : IRequest<UpdatedOperationClaimDto> {
+public class UpdateOperationClaimCommand : IRequest<UpdatedOperationClaimDto>, ISecuredRequest {
     public Guid Id { get; set; }
     public String Name { get; set; }
+
+    public String[] Roles { get; } = { "Admin" };
 
     internal class UpdateOperationClaimCommandHandler : IRequestHandler<UpdateOperationClaimCommand, UpdatedOperationClaimDto> {
         private readonly IOperationClaimWriteRepository _operationClaimWriteRepository;

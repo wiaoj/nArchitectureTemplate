@@ -35,7 +35,7 @@ public class RegisterCommand : IRequest<RegisteredDto> {
 
         public async Task<RegisteredDto> Handle(RegisterCommand request, CancellationToken cancellationToken) {
 
-            await _authorizationBusinessRules.UserEmailShouldBeNotExists(request.Register.Email);
+            await _authorizationBusinessRules.EmailCanNotBeDuplicatedWhenRegistered(request.Register.Email);
 
             HashingHelper.CreatePasswordHash(request.Register.Password, out Byte[] passwordHash, out Byte[] passwordSalt);
 
@@ -49,19 +49,18 @@ public class RegisterCommand : IRequest<RegisteredDto> {
                 AuthenticatorType = Core.Security.Enums.AuthenticatorType.None
             };
 
-            ApplicationUser addedUser = await _userWriteRepository.AddAsync(user);
+            ApplicationUser createdUser = await _userWriteRepository.AddAsync(user);
 
             await _authService.CreateUserClaim(user);
             //kullanıcı yetkisi eklenecek
-            AccessToken accessToken = await _authService.CreateAccessToken(addedUser);
-            AccessTokenDto mappedAccessToken = _mapper.Map<AccessTokenDto>(accessToken);
+            AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 
-            RefreshToken refreshToken = await _authService.CreateRefreshToken(addedUser, request.IpAddress);
-            RefreshToken addedRefreshToken = await _authService.AddRefreshToken(refreshToken);
-            RefreshTokenDto mappedRefreshToken = _mapper.Map<RefreshTokenDto>(addedRefreshToken);
+            RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(createdUser, request.IpAddress);
+            RefreshToken addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
+
             return new() {
-                AccessToken = mappedAccessToken,
-                RefreshToken = mappedRefreshToken
+                AccessToken = createdAccessToken,
+                RefreshToken = addedRefreshToken
             };
         }
     }

@@ -10,8 +10,16 @@ internal class OperationClaimModel : IEntityTypeConfiguration<OperationClaim> {
         x.Property(p => p.Id).HasColumnName("Id");
         x.Property(p => p.Name).HasColumnName("Name");
 
+        x.Ignore(p => p.CreatedDate);
+        x.Ignore(p => p.UpdatedDate);
         {
             x.HasMany(x => x.UserOperationClaims);
         }
+
+        //OperationClaim[] operationClaimEntitySeeds = {
+        //    new(Guid.NewGuid(), "Admin"),
+        //    new(Guid.NewGuid(), "User"),
+        //};
+        //x.HasData(operationClaimEntitySeeds);
     }
 }

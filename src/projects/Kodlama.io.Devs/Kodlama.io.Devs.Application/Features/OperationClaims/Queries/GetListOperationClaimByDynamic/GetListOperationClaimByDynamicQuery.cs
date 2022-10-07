@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Core.Application.Requests;
 using Core.Persistence.Dynamic;
 using Core.Persistence.Paging;
@@ -8,9 +9,11 @@ using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
 using MediatR;
 
 namespace Kodlama.io.Devs.Application.Features.OperationClaims.Queries.GetListOperationClaimByDynamic;
-public class GetListOperationClaimByDynamicQuery : IRequest<OperationClaimListModel> {
+public class GetListOperationClaimByDynamicQuery : IRequest<OperationClaimListModel>, ISecuredRequest {
     public PageRequest PageRequest { get; set; }
     public Dynamic Dynamic { get; set; }
+
+    public String[] Roles { get; } = { "Admin" };
 
     public class GetListOperationClaimByDynamicQueryHandler : IRequestHandler<GetListOperationClaimByDynamicQuery, OperationClaimListModel> {
         private readonly IOperationClaimReadRepository _operationClaimReadRepository;

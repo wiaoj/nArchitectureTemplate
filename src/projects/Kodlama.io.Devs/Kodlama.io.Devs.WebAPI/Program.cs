@@ -45,13 +45,13 @@ builder.Services.AddSwaggerGen(option => {
         Version = "v1"
     });
 
-    option.AddSecurityDefinition("Bearer", new() {
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme {
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme."
+        Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer -TOKEN- \""
     });
 
     option.AddSecurityRequirement(new OpenApiSecurityRequirement {

@@ -1,4 +1,6 @@
 ﻿using Core.Security.Dtos;
+using Core.Security.Entities;
+using Core.Security.JWT;
 using Kodlama.io.Devs.Application.Features.Authorizations.Commands.Register;
 using Kodlama.io.Devs.Application.Features.Authorizations.Dtos;
 using Kodlama.io.Devs.Application.Features.Authorizations.Queries.Login;
@@ -9,34 +11,40 @@ namespace Kodlama.io.Devs.WebAPI.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class AuthsController : BaseController {
-    protected String? getIpAddress() {
-        if(Request.Headers.ContainsKey("X-Forwarded-For")) {
-            return Request.Headers["X-Forwarded-For"];
-        }
-        return HttpContext.Connection.RemoteIpAddress?.MapToIPv4().ToString();
-    }
+    
 
     [HttpPost("[action]")]
     [Produces("application/json")]
-    [ProducesResponseType(typeof(RegisteredDto), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(AccessToken), StatusCodes.Status201Created)]
     public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto) {
-        RegisteredDto registeredDto = await Mediator.Send(
+        RegisteredDto result = await Mediator.Send(
             new RegisterCommand {
                 Register = userForRegisterDto,
-                IpAddress = getIpAddress()
+                IpAddress = GetIpAddress()
             });
-        return Created("", registeredDto);
+        SetRefreshTokenToCookie(result.RefreshToken);
+        return Created("", result.AccessToken);
     }
 
     [HttpPost("[action]")]
     [Produces("application/json")]
-    [ProducesResponseType(typeof(RegisteredDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(AccessToken), StatusCodes.Status200OK)]
     public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto) {
-        LoginedDto loginedDto = await Mediator.Send(
+        LoginedDto result = await Mediator.Send(
             new LoginQuery {
                 Login = userForLoginDto,
-                IpAddress = getIpAddress()
+                IpAddress = GetIpAddress()
             });
-        return Ok(loginedDto);
+
+        SetRefreshTokenToCookie(result.RefreshToken);
+        return Ok(result.AccessToken);
+    }
+
+    private void SetRefreshTokenToCookie(RefreshToken refreshToken) {
+        CookieOptions cookieOptions = new() {
+            HttpOnly = true,
+            Expires = DateTime.Now.AddDays(7)
+        };
+        Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
     }
 }

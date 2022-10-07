@@ -76,6 +76,7 @@ public class BaseDbContext : DbContext {
 
 
         OperationClaim[] operationClaimEntitySeeds = {
+            new(Guid.NewGuid(), "Admin"),
             new(Guid.NewGuid(), "User"),
         };
         modelBuilder.Entity<OperationClaim>().HasData(operationClaimEntitySeeds);

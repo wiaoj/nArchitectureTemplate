@@ -13,7 +13,7 @@ internal class UserModel : IEntityTypeConfiguration<User> {
         x.Property(p => p.Email).HasColumnName("Email");
         x.Property(p => p.PasswordSalt).HasColumnName("PasswordSalt");
         x.Property(p => p.PasswordHash).HasColumnName("PasswordHash");
-        x.Property(p => p.Status).HasColumnName("Status").HasDefaultValue(true);
+        x.Property(p => p.Status).HasColumnName("Status");
         x.Property(p => p.AuthenticatorType).HasColumnName("AuthenticatorType");
 
         {

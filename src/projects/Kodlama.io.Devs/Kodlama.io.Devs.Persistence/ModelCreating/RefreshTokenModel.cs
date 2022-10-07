@@ -18,6 +18,9 @@ internal class RefreshTokenModel : IEntityTypeConfiguration<RefreshToken> {
         x.Property(p => p.ReplacedByToken).HasColumnName("ReplacedByToken");
         x.Property(p => p.RevokedByIp).HasColumnName("RevokedByIp");
 
+        x.Ignore(p => p.CreatedDate);
+        x.Ignore(p => p.UpdatedDate);
+
         {
             x.HasOne(x => x.User);
         }

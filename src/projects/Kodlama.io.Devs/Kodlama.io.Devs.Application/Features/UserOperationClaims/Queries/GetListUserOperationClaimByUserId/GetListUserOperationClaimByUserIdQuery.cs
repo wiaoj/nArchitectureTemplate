@@ -1,25 +1,24 @@
 ﻿using AutoMapper;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Requests;
-using Core.Persistence.Dynamic;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
 using Kodlama.io.Devs.Application.Features.UserOperationClaims.Models;
 using Kodlama.io.Devs.Application.Services.Repositories.ReadRepositories;
 using MediatR;
 
-namespace Kodlama.io.Devs.Application.Features.UserOperationClaims.Queries.GetListUserOperationClaimByDynamic;
-public class GetListUserOperationClaimByDynamicQuery : IRequest<UserOperationClaimListModel>, ISecuredRequest {
+namespace Kodlama.io.Devs.Application.Features.UserOperationClaims.Queries.GetListUserOperationClaimByUserId;
+public class GetListUserOperationClaimByUserIdQuery : IRequest<UserOperationClaimListModel>, ISecuredRequest {
+    public Guid UserId { get; set; }
     public PageRequest PageRequest { get; set; }
-    public Dynamic Dynamic { get; set; }
 
     public String[] Roles { get; } = { "Admin" };
 
-    public class GetListUserOperationClaimByDynamicQueryHandler : IRequestHandler<GetListUserOperationClaimByDynamicQuery, UserOperationClaimListModel> {
+    public class GetListUserOperationClaimByUserIdQueryHandler : IRequestHandler<GetListUserOperationClaimByUserIdQuery, UserOperationClaimListModel> {
         private readonly IUserOperationClaimReadRepository _userOperationClaimReadRepository;
         private readonly IMapper _mapper;
 
-        public GetListUserOperationClaimByDynamicQueryHandler(
+        public GetListUserOperationClaimByUserIdQueryHandler(
             IUserOperationClaimReadRepository userOperationClaimReadRepository,
             IMapper mapper
             ) {
@@ -27,10 +26,10 @@ public class GetListUserOperationClaimByDynamicQuery : IRequest<UserOperationCla
             _mapper = mapper;
         }
 
-        public async Task<UserOperationClaimListModel> Handle(GetListUserOperationClaimByDynamicQuery request, CancellationToken cancellationToken) {
-            IPaginate<UserOperationClaim> socialLinks = await _userOperationClaimReadRepository.GetListByDynamicAsync(
-                dynamic: request.Dynamic, 
-                index: request.PageRequest.Page, 
+        public async Task<UserOperationClaimListModel> Handle(GetListUserOperationClaimByUserIdQuery request, CancellationToken cancellationToken) {
+            IPaginate<UserOperationClaim> socialLinks = await _userOperationClaimReadRepository.GetListAsync(
+                predicate: x => x.UserId.Equals(request.UserId),
+                index: request.PageRequest.Page,
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken
                 );

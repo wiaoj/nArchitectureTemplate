@@ -40,14 +40,14 @@ public class LoginQuery : IRequest<LoginedDto> {
             await _authorizationBusinessRules.UserPasswordShouldBeMatch(user, request.Login.Password);
 
             AccessToken accessToken = await _authService.CreateAccessToken(user);
-            AccessTokenDto mappedAccessToken = _mapper.Map<AccessTokenDto>(accessToken);
+            //AccessTokenDto mappedAccessToken = _mapper.Map<AccessTokenDto>(accessToken);
 
             RefreshToken refreshToken = await _authService.CreateRefreshToken(user, request.IpAddress);
             RefreshToken addedRefreshToken = await _authService.AddRefreshToken(refreshToken);
-            RefreshTokenDto mappedRefreshToken = _mapper.Map<RefreshTokenDto>(addedRefreshToken);
+            //RefreshTokenDto mappedRefreshToken = _mapper.Map<RefreshTokenDto>(addedRefreshToken);
             return new() {
-                AccessToken = mappedAccessToken,
-                RefreshToken = mappedRefreshToken
+                AccessToken = accessToken,
+                RefreshToken = addedRefreshToken
             };
         }
     }

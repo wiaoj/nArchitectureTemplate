@@ -8,10 +8,10 @@ using Kodlama.io.Devs.Domain.Entities;
 namespace Kodlama.io.Devs.Application.Features.Authorizations.Profiles;
 public class MappingProfiles : Profile {
     public MappingProfiles() {
-        CreateMap<ApplicationUser, UserForRegisterDto>().ReverseMap();
-        CreateMap<ApplicationUser, UserForLoginDto>().ReverseMap();
+        //CreateMap<ApplicationUser, UserForRegisterDto>().ReverseMap();
+        //CreateMap<ApplicationUser, UserForLoginDto>().ReverseMap();
 
-        CreateMap<AccessToken, AccessTokenDto>().ReverseMap();
-        CreateMap<RefreshToken, RefreshTokenDto>().ReverseMap();
+        //CreateMap<AccessToken, AccessTokenDto>().ReverseMap();
+        //CreateMap<RefreshToken, RefreshTokenDto>().ReverseMap();
     }
 }
